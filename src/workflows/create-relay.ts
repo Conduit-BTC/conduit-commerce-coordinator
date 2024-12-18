@@ -4,8 +4,8 @@ import {
     StepResponse,
     WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
-import { RELAY_POOL_MODULE } from "src/modules/relay-pool"
-import RelayPoolModuleService from "src/modules/relay-pool/service"
+import { RELAY_POOL_MODULE } from "@/modules/relay-pool"
+import RelayPoolModuleService from "@/modules/relay-pool/service"
 
 type CreateRelayWorkflowInput = {
     url: string

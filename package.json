@@ -30,8 +30,11 @@
     "@mikro-orm/knex": "5.9.7",
     "@mikro-orm/migrations": "5.9.7",
     "@mikro-orm/postgresql": "5.9.7",
+    "@nostrify/nostrify": "npm:@jsr/nostrify__nostrify",
     "awilix": "^8.0.1",
-    "pg": "^8.13.0"
+    "nostr-tools": "^2.10.4",
+    "pg": "^8.13.0",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@medusajs/test-utils": "2.1.2",
@@ -42,6 +45,7 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.2.25",
+    "@types/ws": "^8.5.13",
     "jest": "^29.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
