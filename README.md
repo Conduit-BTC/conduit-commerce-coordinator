@@ -49,7 +49,7 @@ integrations with external services, and powerful extensibility.
 Conduit's primary task-at-hand is to transform MedusaJS into a Nostr Commerce
 Coordinator. Currently, this implementation is a work-in-progress.
 
-We're using [Nostrify](https://nostrify.dev/) to handle the Nostr/Medusa dance.
+We're using [Nostrify](https://nostrify.dev/) and [nostr-tools](https://github.com/nbd-wtf/nostr-tools?tab=readme-ov-file) to handle the Nostr/Medusa dance.
 There's a _lot_ more to come, so check back often, oh Argonaut of the
 Nostrverse!
 
