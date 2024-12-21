@@ -1,0 +1,15 @@
+meta {
+  name: Sync Products
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{API_URL}}/admin/sync/products
+  body: none
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{ADMIN_API_KEY}}
+}
