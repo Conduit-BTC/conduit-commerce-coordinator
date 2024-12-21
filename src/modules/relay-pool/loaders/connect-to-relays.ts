@@ -14,6 +14,8 @@ if (!global.WebSocket) {
 export default async function connectToRelaysLoader({
     container,
 }: LoaderOptions) {
+    if (process.env.DISABLE_WEBSOCKETS === 'true' || process.env.DISABLE_ORDER_FETCHING === 'true') return;
+
     const logger: Logger = container.resolve("logger")
     const { NRelay1, NSchema: n } = await import('@nostrify/nostrify')
     const { decrypt: nostrDecrypt } = await import('nostr-tools/nip04');
@@ -33,7 +35,7 @@ export default async function connectToRelaysLoader({
         }
     })
 
-    const url = 'wss://relay.primal.net';
+    const url = 'ws://localhost:7777';
     const pubkey = process.env.PUBKEY;
     const privkey = process.env.PRIVKEY;
 
