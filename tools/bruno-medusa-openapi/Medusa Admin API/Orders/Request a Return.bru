@@ -1,0 +1,46 @@
+meta {
+  name: Request a Return
+  type: http
+  seq: 19
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/return
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "items": [
+      {
+        "item_id": "",
+        "reason_id": "",
+        "note": "",
+        "quantity": ""
+      }
+    ],
+    "return_shipping": {
+      "option_id": "",
+      "price": ""
+    },
+    "note": "",
+    "receive_now": "",
+    "no_notification": "",
+    "refund": "",
+    "location_id": ""
+  }
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Delete an Invite
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/admin/invites/:invite_id
+  body: none
+  auth: none
+}
+
+params:path {
+  invite_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

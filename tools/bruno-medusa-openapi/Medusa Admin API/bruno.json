@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Medusa Admin API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

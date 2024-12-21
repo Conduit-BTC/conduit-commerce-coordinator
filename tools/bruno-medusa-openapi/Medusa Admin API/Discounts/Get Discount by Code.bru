@@ -1,0 +1,24 @@
+meta {
+  name: Get Discount by Code
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/admin/discounts/code/:code
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  code: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

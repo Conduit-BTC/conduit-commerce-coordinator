@@ -1,0 +1,32 @@
+meta {
+  name: Create an Inventory Level
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/admin/inventory-items/:id/location-levels
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "location_id": "",
+    "stocked_quantity": "",
+    "incoming_quantity": ""
+  }
+}

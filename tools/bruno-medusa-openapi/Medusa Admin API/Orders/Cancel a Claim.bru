@@ -1,0 +1,25 @@
+meta {
+  name: Cancel a Claim
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/claims/:claim_id/cancel
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  claim_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

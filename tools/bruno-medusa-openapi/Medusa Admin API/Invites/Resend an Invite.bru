@@ -1,0 +1,19 @@
+meta {
+  name: Resend an Invite
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/admin/invites/:invite_id/resend
+  body: none
+  auth: none
+}
+
+params:path {
+  invite_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

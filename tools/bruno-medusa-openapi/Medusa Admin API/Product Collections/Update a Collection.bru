@@ -1,0 +1,27 @@
+meta {
+  name: Update a Collection
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/collections/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "title": "",
+    "handle": "",
+    "metadata": {}
+  }
+}

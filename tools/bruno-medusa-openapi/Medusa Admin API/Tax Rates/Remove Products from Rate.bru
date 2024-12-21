@@ -1,0 +1,30 @@
+meta {
+  name: Remove Products from Rate
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{baseUrl}}/admin/tax-rates/:id/products/batch
+  body: json
+  auth: none
+}
+
+params:query {
+  ~fields: 
+  ~expand: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "products": []
+  }
+}

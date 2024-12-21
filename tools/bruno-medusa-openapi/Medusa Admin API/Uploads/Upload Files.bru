@@ -1,0 +1,19 @@
+meta {
+  name: Upload Files
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/admin/uploads
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:multipart-form {
+  files: 
+}

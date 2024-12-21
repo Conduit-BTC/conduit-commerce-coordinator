@@ -1,0 +1,15 @@
+meta {
+  name: List Product Types
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/admin/products/types
+  body: none
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

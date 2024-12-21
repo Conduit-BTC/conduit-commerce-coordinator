@@ -1,0 +1,19 @@
+meta {
+  name: Delete a Collection
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/admin/collections/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

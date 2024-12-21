@@ -1,0 +1,20 @@
+meta {
+  name: Remove Fulfillment Provider
+  type: http
+  seq: 10
+}
+
+delete {
+  url: {{baseUrl}}/admin/regions/:id/fulfillment-providers/:provider_id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  provider_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

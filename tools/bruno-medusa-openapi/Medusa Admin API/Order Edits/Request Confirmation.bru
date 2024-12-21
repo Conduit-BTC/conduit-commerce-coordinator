@@ -1,0 +1,19 @@
+meta {
+  name: Request Confirmation
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{baseUrl}}/admin/order-edits/:id/request
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

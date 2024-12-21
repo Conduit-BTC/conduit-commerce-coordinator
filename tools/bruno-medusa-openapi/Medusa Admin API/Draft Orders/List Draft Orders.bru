@@ -1,0 +1,27 @@
+meta {
+  name: List Draft Orders
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/draft-orders
+  body: none
+  auth: none
+}
+
+params:query {
+  ~offset: 
+  ~limit: 
+  ~q: 
+  ~order: 
+  ~expand: 
+  ~fields: 
+  ~created_at: 
+  ~updated_at: 
+  ~status: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

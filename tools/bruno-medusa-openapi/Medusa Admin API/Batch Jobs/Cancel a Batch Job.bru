@@ -1,0 +1,19 @@
+meta {
+  name: Cancel a Batch Job
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/batch-jobs/:id/cancel
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

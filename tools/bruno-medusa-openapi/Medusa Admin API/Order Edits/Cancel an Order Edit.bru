@@ -1,0 +1,19 @@
+meta {
+  name: Cancel an Order Edit
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/order-edits/:id/cancel
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

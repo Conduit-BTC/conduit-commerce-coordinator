@@ -1,0 +1,24 @@
+meta {
+  name: Get a Tax Rate
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/admin/tax-rates/:id
+  body: none
+  auth: none
+}
+
+params:query {
+  ~fields: 
+  ~expand: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

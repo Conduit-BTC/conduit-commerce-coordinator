@@ -1,0 +1,25 @@
+meta {
+  name: Resend Notification
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/notifications/:id/resend
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "to": ""
+  }
+}

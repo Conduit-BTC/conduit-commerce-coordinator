@@ -1,0 +1,19 @@
+meta {
+  name: Get Payment details
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/payments/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

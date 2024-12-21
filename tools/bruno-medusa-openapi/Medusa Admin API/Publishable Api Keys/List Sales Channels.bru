@@ -1,0 +1,23 @@
+meta {
+  name: List Sales Channels
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{baseUrl}}/admin/publishable-api-keys/:id/sales-channels
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

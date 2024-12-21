@@ -1,0 +1,19 @@
+meta {
+  name: Delete a Product Category
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/admin/product-categories/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

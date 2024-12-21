@@ -1,0 +1,29 @@
+meta {
+  name: Add Products to Sales Channel
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/sales-channels/:id/products/batch
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "product_ids": [
+      {
+        "id": ""
+      }
+    ]
+  }
+}

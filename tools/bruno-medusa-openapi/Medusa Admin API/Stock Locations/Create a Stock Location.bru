@@ -1,0 +1,38 @@
+meta {
+  name: Create a Stock Location
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/stock-locations
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "address_id": "",
+    "metadata": {},
+    "address": {
+      "address_1": "",
+      "address_2": "",
+      "city": "",
+      "country_code": "",
+      "phone": "",
+      "postal_code": "",
+      "province": "",
+      "metadata": {}
+    }
+  }
+}

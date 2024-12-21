@@ -1,0 +1,35 @@
+meta {
+  name: Update a Condition
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/discounts/:discount_id/conditions/:condition_id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  discount_id: 
+  condition_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "products": [],
+    "product_types": [],
+    "product_collections": [],
+    "product_tags": [],
+    "customer_groups": []
+  }
+}

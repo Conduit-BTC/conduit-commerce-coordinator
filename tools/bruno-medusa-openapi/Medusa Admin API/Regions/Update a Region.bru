@@ -1,0 +1,35 @@
+meta {
+  name: Update a Region
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/regions/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "currency_code": "",
+    "automatic_taxes": "",
+    "gift_cards_taxable": "",
+    "tax_provider_id": "",
+    "tax_code": "",
+    "tax_rate": "",
+    "includes_tax": "",
+    "payment_providers": [],
+    "fulfillment_providers": [],
+    "countries": []
+  }
+}

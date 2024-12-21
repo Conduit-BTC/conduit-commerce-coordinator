@@ -1,0 +1,32 @@
+meta {
+  name: List Batch Jobs
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/batch-jobs
+  body: none
+  auth: none
+}
+
+params:query {
+  ~limit: 
+  ~offset: 
+  ~id: 
+  ~type: 
+  ~confirmed_at: 
+  ~pre_processed_at: 
+  ~completed_at: 
+  ~failed_at: 
+  ~canceled_at: 
+  ~order: 
+  ~expand: 
+  ~fields: 
+  ~created_at: 
+  ~updated_at: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

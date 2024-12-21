@@ -1,0 +1,15 @@
+meta {
+  name: List Applications
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/apps
+  body: none
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

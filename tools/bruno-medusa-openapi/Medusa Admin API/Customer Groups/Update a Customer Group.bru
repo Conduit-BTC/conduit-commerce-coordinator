@@ -1,0 +1,26 @@
+meta {
+  name: Update a Customer Group
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/customer-groups/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "metadata": {}
+  }
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Delete a Product Option
+  type: http
+  seq: 11
+}
+
+delete {
+  url: {{baseUrl}}/admin/products/:id/options/:option_id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  option_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

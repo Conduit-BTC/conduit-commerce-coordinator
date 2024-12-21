@@ -1,0 +1,20 @@
+meta {
+  name: Remove Country
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/admin/regions/:id/countries/:country_code
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  country_code: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

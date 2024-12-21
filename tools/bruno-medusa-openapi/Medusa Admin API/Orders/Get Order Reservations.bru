@@ -1,0 +1,24 @@
+meta {
+  name: Get Order Reservations
+  type: http
+  seq: 18
+}
+
+get {
+  url: {{baseUrl}}/admin/orders/:id/reservations
+  body: none
+  auth: none
+}
+
+params:query {
+  ~offset: 
+  ~limit: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

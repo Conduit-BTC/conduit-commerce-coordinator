@@ -1,0 +1,27 @@
+meta {
+  name: Refund Payment
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/admin/payments/:id/refund
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "amount": "",
+    "reason": "",
+    "note": ""
+  }
+}

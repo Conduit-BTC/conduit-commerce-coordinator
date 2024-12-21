@@ -1,0 +1,15 @@
+meta {
+  name: Lists Invites
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/invites
+  body: none
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

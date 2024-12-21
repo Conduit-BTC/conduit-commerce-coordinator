@@ -1,0 +1,27 @@
+meta {
+  name: Update Store Details
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/store
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "swap_link_template": "",
+    "payment_link_template": "",
+    "invite_link_template": "",
+    "default_currency_code": "",
+    "currencies": [],
+    "metadata": {}
+  }
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Remove Region
+  type: http
+  seq: 16
+}
+
+delete {
+  url: {{baseUrl}}/admin/discounts/:id/regions/:region_id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  region_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

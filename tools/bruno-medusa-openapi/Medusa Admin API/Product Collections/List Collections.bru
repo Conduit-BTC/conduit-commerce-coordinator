@@ -1,0 +1,28 @@
+meta {
+  name: List Collections
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/collections
+  body: none
+  auth: none
+}
+
+params:query {
+  ~limit: 
+  ~offset: 
+  ~title: 
+  ~handle: 
+  ~q: 
+  ~order: 
+  ~discount_condition_id: 
+  ~created_at: 
+  ~updated_at: 
+  ~deleted_at: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

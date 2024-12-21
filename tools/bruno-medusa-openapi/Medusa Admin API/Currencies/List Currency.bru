@@ -1,0 +1,24 @@
+meta {
+  name: List Currency
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/currencies
+  body: none
+  auth: none
+}
+
+params:query {
+  ~code: 
+  ~includes_tax: 
+  ~order: 
+  ~q: 
+  ~offset: 
+  ~limit: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

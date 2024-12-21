@@ -1,0 +1,26 @@
+meta {
+  name: Update Payment Collection
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/payment-collections/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "description": "",
+    "metadata": {}
+  }
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Add a Currency Code
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/admin/store/currencies/:code
+  body: none
+  auth: none
+}
+
+params:path {
+  code: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Add a Product Option
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/admin/products/:id/options
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "title": ""
+  }
+}

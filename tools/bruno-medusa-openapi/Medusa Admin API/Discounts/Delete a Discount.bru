@@ -1,0 +1,19 @@
+meta {
+  name: Delete a Discount
+  type: http
+  seq: 12
+}
+
+delete {
+  url: {{baseUrl}}/admin/discounts/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

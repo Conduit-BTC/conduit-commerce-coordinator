@@ -1,0 +1,26 @@
+meta {
+  name: Upsert Line Item Change
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/admin/order-edits/:id/items/:item_id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+  item_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "quantity": ""
+  }
+}

@@ -1,0 +1,26 @@
+meta {
+  name: Set Metadata
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/admin/products/:id/metadata
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "key": "",
+    "value": ""
+  }
+}

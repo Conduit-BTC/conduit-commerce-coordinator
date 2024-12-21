@@ -1,0 +1,20 @@
+meta {
+  name: Add Region to Discount
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{baseUrl}}/admin/discounts/:id/regions/:region_id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  region_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

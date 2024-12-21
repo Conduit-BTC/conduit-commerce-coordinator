@@ -1,0 +1,27 @@
+meta {
+  name: Add a Line Item
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/admin/order-edits/:id/items
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "variant_id": "",
+    "quantity": "",
+    "metadata": {}
+  }
+}

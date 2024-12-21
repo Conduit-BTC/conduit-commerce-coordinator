@@ -1,0 +1,27 @@
+meta {
+  name: Create a Dynamic Code
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{baseUrl}}/admin/discounts/:id/dynamic-codes
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "code": "",
+    "usage_limit": "",
+    "metadata": {}
+  }
+}

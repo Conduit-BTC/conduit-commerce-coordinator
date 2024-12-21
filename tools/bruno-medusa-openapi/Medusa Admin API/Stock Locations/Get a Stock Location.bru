@@ -1,0 +1,24 @@
+meta {
+  name: Get a Stock Location
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/admin/stock-locations/:id
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

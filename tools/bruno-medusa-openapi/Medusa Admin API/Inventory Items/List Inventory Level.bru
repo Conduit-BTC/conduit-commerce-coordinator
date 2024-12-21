@@ -1,0 +1,25 @@
+meta {
+  name: List Inventory Level
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/admin/inventory-items/:id/location-levels
+  body: none
+  auth: none
+}
+
+params:query {
+  ~location_id: 
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

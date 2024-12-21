@@ -1,0 +1,32 @@
+meta {
+  name: Ship a Claim-s Fulfillment
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/claims/:claim_id/shipments
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  claim_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "fulfillment_id": "",
+    "tracking_numbers": []
+  }
+}

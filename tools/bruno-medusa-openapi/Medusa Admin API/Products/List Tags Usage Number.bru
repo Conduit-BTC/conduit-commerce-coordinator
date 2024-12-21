@@ -1,0 +1,15 @@
+meta {
+  name: List Tags Usage Number
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/admin/products/tag-usage
+  body: none
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

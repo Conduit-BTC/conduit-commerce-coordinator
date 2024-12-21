@@ -1,0 +1,15 @@
+meta {
+  name: List Tax Providers
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/admin/store/tax-providers
+  body: none
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

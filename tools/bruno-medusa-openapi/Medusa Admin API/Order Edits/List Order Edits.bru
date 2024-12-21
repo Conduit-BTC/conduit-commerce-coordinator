@@ -1,0 +1,24 @@
+meta {
+  name: List Order Edits
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/order-edits
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+  ~order_id: 
+  ~limit: 
+  ~offset: 
+  ~expand: 
+  ~fields: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

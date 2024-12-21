@@ -1,0 +1,32 @@
+meta {
+  name: List Product Variants
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/variants
+  body: none
+  auth: none
+}
+
+params:query {
+  ~id: 
+  ~expand: 
+  ~fields: 
+  ~offset: 
+  ~limit: 
+  ~order: 
+  ~manage_inventory: 
+  ~allow_backorder: 
+  ~cart_id: 
+  ~region_id: 
+  ~currency_code: 
+  ~customer_id: 
+  ~title: 
+  ~inventory_quantity: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

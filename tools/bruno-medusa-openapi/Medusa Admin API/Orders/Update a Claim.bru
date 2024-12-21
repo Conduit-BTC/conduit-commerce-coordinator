@@ -1,0 +1,62 @@
+meta {
+  name: Update a Claim
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/claims/:claim_id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  claim_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "claim_items": [
+      {
+        "id": "",
+        "item_id": "",
+        "quantity": "",
+        "note": "",
+        "reason": "",
+        "tags": [
+          {
+            "id": "",
+            "value": ""
+          }
+        ],
+        "images": [
+          {
+            "id": "",
+            "url": ""
+          }
+        ],
+        "metadata": {}
+      }
+    ],
+    "shipping_methods": [
+      {
+        "id": "",
+        "option_id": "",
+        "price": "",
+        "data": {}
+      }
+    ],
+    "no_notification": "",
+    "metadata": {}
+  }
+}

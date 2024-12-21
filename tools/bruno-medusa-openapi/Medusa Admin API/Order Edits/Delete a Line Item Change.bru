@@ -1,0 +1,20 @@
+meta {
+  name: Delete a Line Item Change
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/admin/order-edits/:id/changes/:change_id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  change_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

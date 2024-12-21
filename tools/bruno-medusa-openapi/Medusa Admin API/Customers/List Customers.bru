@@ -1,0 +1,28 @@
+meta {
+  name: List Customers
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/customers
+  body: none
+  auth: none
+}
+
+params:query {
+  ~limit: 
+  ~offset: 
+  ~expand: 
+  ~fields: 
+  ~q: 
+  ~has_account: 
+  ~order: 
+  ~groups: 
+  ~created_at: 
+  ~updated_at: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

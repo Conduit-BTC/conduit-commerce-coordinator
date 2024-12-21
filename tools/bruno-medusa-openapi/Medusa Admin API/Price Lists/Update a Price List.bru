@@ -1,0 +1,47 @@
+meta {
+  name: Update a Price List
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/price-lists/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "description": "",
+    "starts_at": "",
+    "ends_at": "",
+    "type": "",
+    "status": "",
+    "prices": [
+      {
+        "id": "",
+        "region_id": "",
+        "currency_code": "",
+        "variant_id": "",
+        "amount": "",
+        "min_quantity": "",
+        "max_quantity": ""
+      }
+    ],
+    "customer_groups": [
+      {
+        "id": ""
+      }
+    ],
+    "includes_tax": ""
+  }
+}

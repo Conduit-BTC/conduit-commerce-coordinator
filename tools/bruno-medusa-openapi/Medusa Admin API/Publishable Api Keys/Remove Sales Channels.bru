@@ -1,0 +1,29 @@
+meta {
+  name: Remove Sales Channels
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{baseUrl}}/admin/publishable-api-keys/:id/sales-channels/batch
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "sales_channel_ids": [
+      {
+        "id": ""
+      }
+    ]
+  }
+}

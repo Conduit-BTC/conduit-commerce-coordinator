@@ -1,0 +1,19 @@
+meta {
+  name: Delete Product Prices
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{baseUrl}}/admin/price-lists/:id/products/prices/batch
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

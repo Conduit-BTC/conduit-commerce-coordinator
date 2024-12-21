@@ -1,0 +1,36 @@
+meta {
+  name: Update a Tax Rate
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/tax-rates/:id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~fields: 
+  ~expand: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "code": "",
+    "name": "",
+    "region_id": "",
+    "rate": "",
+    "products": [],
+    "shipping_options": [],
+    "product_types": []
+  }
+}

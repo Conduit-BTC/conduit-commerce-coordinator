@@ -1,0 +1,23 @@
+meta {
+  name: Create a Collection
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/collections
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "title": "",
+    "handle": "",
+    "metadata": {}
+  }
+}

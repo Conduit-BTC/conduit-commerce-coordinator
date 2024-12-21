@@ -1,0 +1,29 @@
+meta {
+  name: List Customer Groups
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/customer-groups
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+  ~offset: 
+  ~order: 
+  ~discount_condition_id: 
+  ~id: 
+  ~name: 
+  ~created_at: 
+  ~updated_at: 
+  ~limit: 
+  ~expand: 
+  ~fields: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

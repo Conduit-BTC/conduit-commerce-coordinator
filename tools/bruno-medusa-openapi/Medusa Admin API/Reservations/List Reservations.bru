@@ -1,0 +1,28 @@
+meta {
+  name: List Reservations
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/reservations
+  body: none
+  auth: none
+}
+
+params:query {
+  ~location_id: 
+  ~inventory_item_id: 
+  ~line_item_id: 
+  ~quantity: 
+  ~description: 
+  ~created_at: 
+  ~offset: 
+  ~limit: 
+  ~expand: 
+  ~fields: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

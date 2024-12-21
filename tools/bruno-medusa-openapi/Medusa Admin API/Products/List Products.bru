@@ -1,0 +1,41 @@
+meta {
+  name: List Products
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/products
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+  ~discount_condition_id: 
+  ~id: 
+  ~status: 
+  ~collection_id: 
+  ~tags: 
+  ~price_list_id: 
+  ~sales_channel_id: 
+  ~type_id: 
+  ~category_id: 
+  ~include_category_children: 
+  ~title: 
+  ~description: 
+  ~handle: 
+  ~is_giftcard: 
+  ~created_at: 
+  ~updated_at: 
+  ~deleted_at: 
+  ~offset: 
+  ~limit: 
+  ~expand: 
+  ~fields: 
+  ~order: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

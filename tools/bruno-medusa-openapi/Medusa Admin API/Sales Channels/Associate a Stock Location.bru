@@ -1,0 +1,25 @@
+meta {
+  name: Associate a Stock Location
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/admin/sales-channels/:id/stock-locations
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "location_id": ""
+  }
+}

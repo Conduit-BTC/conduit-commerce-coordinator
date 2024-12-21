@@ -1,0 +1,19 @@
+meta {
+  name: Protected File Upload
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/uploads/protected
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:multipart-form {
+  files: 
+}

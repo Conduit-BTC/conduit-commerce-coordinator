@@ -1,0 +1,23 @@
+meta {
+  name: Create a Note
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/notes
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "resource_id": "",
+    "resource_type": "",
+    "value": ""
+  }
+}

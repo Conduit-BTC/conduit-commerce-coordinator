@@ -1,0 +1,20 @@
+meta {
+  name: Delete a Variant-s Prices
+  type: http
+  seq: 11
+}
+
+delete {
+  url: {{baseUrl}}/admin/price-lists/:id/variants/:variant_id/prices
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  variant_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

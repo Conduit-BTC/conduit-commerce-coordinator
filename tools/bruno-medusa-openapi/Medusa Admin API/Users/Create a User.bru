@@ -1,0 +1,25 @@
+meta {
+  name: Create a User
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/users
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "role": "",
+    "password": ""
+  }
+}

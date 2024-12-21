@@ -1,0 +1,25 @@
+meta {
+  name: Get a Condition
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/admin/discounts/:discount_id/conditions/:condition_id
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  discount_id: 
+  condition_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

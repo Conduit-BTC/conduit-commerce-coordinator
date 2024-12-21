@@ -1,0 +1,15 @@
+meta {
+  name: List Shipping Profiles
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/shipping-profiles
+  body: none
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

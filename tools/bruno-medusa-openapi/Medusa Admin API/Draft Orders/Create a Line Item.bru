@@ -1,0 +1,29 @@
+meta {
+  name: Create a Line Item
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/draft-orders/:id/line-items
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "variant_id": "",
+    "unit_price": "",
+    "title": "",
+    "quantity": "",
+    "metadata": {}
+  }
+}

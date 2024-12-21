@@ -1,0 +1,26 @@
+meta {
+  name: Accept an Invite
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/admin/invites/accept
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "token": "",
+    "user": {
+      "first_name": "",
+      "last_name": "",
+      "password": ""
+    }
+  }
+}

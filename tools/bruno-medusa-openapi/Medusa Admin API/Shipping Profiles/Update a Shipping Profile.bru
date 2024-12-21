@@ -1,0 +1,29 @@
+meta {
+  name: Update a Shipping Profile
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/shipping-profiles/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "metadata": {},
+    "type": "",
+    "products": [],
+    "shipping_options": []
+  }
+}

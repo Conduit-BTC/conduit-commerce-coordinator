@@ -1,0 +1,34 @@
+meta {
+  name: Remove Products from Category
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/admin/product-categories/:id/products/batch
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "product_ids": [
+      {
+        "id": ""
+      }
+    ]
+  }
+}

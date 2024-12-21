@@ -1,0 +1,25 @@
+meta {
+  name: Add Country
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/regions/:id/countries
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "country_code": ""
+  }
+}

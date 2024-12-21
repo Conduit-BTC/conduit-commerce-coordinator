@@ -1,0 +1,26 @@
+meta {
+  name: Cancel Claim-s Fulfillment
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/claims/:claim_id/fulfillments/:fulfillment_id/cancel
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  claim_id: 
+  fulfillment_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

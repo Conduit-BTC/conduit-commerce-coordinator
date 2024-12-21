@@ -1,0 +1,23 @@
+meta {
+  name: Create a Shipping Profile
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/shipping-profiles
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "type": "",
+    "metadata": {}
+  }
+}

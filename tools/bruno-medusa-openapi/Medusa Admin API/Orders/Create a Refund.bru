@@ -1,0 +1,33 @@
+meta {
+  name: Create a Refund
+  type: http
+  seq: 17
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/refund
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "amount": "",
+    "reason": "",
+    "note": "",
+    "no_notification": ""
+  }
+}

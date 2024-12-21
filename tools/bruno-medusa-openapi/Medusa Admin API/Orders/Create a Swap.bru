@@ -1,0 +1,57 @@
+meta {
+  name: Create a Swap
+  type: http
+  seq: 22
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/swaps
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "return_items": [
+      {
+        "item_id": "",
+        "quantity": "",
+        "reason_id": "",
+        "note": ""
+      }
+    ],
+    "return_shipping": {
+      "option_id": "",
+      "price": ""
+    },
+    "additional_items": [
+      {
+        "variant_id": "",
+        "quantity": ""
+      }
+    ],
+    "sales_channel_id": "",
+    "custom_shipping_options": [
+      {
+        "option_id": "",
+        "price": ""
+      }
+    ],
+    "no_notification": "",
+    "return_location_id": "",
+    "allow_backorder": ""
+  }
+}

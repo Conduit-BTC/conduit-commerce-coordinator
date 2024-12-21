@@ -1,0 +1,29 @@
+meta {
+  name: Update a Gift Card
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/gift-cards/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "balance": "",
+    "is_disabled": "",
+    "ends_at": "",
+    "region_id": "",
+    "metadata": {}
+  }
+}

@@ -1,0 +1,32 @@
+meta {
+  name: Add a Shipping Method
+  type: http
+  seq: 21
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/shipping-methods
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "price": "",
+    "option_id": "",
+    "data": {}
+  }
+}

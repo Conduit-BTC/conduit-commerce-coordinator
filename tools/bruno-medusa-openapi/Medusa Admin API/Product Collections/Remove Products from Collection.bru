@@ -1,0 +1,25 @@
+meta {
+  name: Remove Products from Collection
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/admin/collections/:id/products/batch
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "product_ids": []
+  }
+}

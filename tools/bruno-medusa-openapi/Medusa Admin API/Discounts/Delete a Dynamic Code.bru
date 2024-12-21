@@ -1,0 +1,20 @@
+meta {
+  name: Delete a Dynamic Code
+  type: http
+  seq: 14
+}
+
+delete {
+  url: {{baseUrl}}/admin/discounts/:id/dynamic-codes/:code
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  code: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

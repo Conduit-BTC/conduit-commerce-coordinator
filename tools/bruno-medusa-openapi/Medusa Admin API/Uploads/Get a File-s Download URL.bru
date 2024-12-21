@@ -1,0 +1,21 @@
+meta {
+  name: Get a File-s Download URL
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/admin/uploads/download-url
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "file_key": ""
+  }
+}

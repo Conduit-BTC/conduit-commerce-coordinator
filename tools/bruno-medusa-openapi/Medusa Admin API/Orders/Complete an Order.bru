@@ -1,0 +1,24 @@
+meta {
+  name: Complete an Order
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/complete
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

@@ -1,0 +1,29 @@
+meta {
+  name: Add Customers to Group
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/admin/customer-groups/:id/customers/batch
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "customer_ids": [
+      {
+        "id": ""
+      }
+    ]
+  }
+}

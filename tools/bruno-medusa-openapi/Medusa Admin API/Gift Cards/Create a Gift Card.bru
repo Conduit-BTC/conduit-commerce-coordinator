@@ -1,0 +1,25 @@
+meta {
+  name: Create a Gift Card
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/gift-cards
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "value": "",
+    "is_disabled": "",
+    "ends_at": "",
+    "region_id": "",
+    "metadata": {}
+  }
+}

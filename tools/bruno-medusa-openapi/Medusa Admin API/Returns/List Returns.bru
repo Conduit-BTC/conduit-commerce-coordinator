@@ -1,0 +1,20 @@
+meta {
+  name: List Returns
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/returns
+  body: none
+  auth: none
+}
+
+params:query {
+  ~limit: 
+  ~offset: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

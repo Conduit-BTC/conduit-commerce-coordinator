@@ -1,0 +1,33 @@
+meta {
+  name: Ship a Swap-s Fulfillment
+  type: http
+  seq: 27
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/swaps/:swap_id/shipments
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  swap_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "fulfillment_id": "",
+    "tracking_numbers": [],
+    "no_notification": ""
+  }
+}

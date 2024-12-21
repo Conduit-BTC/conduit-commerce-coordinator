@@ -1,0 +1,32 @@
+meta {
+  name: List Price Lists
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/price-lists
+  body: none
+  auth: none
+}
+
+params:query {
+  ~limit: 
+  ~offset: 
+  ~expand: 
+  ~fields: 
+  ~order: 
+  ~id: 
+  ~q: 
+  ~status: 
+  ~name: 
+  ~customer_groups: 
+  ~type: 
+  ~created_at: 
+  ~updated_at: 
+  ~deleted_at: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

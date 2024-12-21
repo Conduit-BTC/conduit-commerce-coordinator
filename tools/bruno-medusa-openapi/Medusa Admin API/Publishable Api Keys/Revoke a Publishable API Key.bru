@@ -1,0 +1,19 @@
+meta {
+  name: Revoke a Publishable API Key
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/publishable-api-keys/:id/revoke
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

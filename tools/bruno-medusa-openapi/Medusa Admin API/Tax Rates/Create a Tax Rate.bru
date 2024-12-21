@@ -1,0 +1,32 @@
+meta {
+  name: Create a Tax Rate
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/tax-rates
+  body: json
+  auth: none
+}
+
+params:query {
+  ~fields: 
+  ~expand: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "code": "",
+    "name": "",
+    "region_id": "",
+    "rate": "",
+    "products": [],
+    "shipping_options": [],
+    "product_types": []
+  }
+}

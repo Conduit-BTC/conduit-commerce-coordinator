@@ -1,0 +1,30 @@
+meta {
+  name: List Users
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/users
+  body: none
+  auth: none
+}
+
+params:query {
+  ~email: 
+  ~first_name: 
+  ~last_name: 
+  ~q: 
+  ~order: 
+  ~id: 
+  ~created_at: 
+  ~updated_at: 
+  ~deleted_at: 
+  ~offset: 
+  ~limit: 
+  ~fields: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

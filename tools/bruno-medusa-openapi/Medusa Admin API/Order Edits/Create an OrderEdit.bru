@@ -1,0 +1,22 @@
+meta {
+  name: Create an OrderEdit
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/order-edits
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "order_id": "",
+    "internal_note": ""
+  }
+}

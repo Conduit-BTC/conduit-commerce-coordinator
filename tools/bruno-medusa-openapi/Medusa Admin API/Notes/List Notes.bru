@@ -1,0 +1,21 @@
+meta {
+  name: List Notes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/notes
+  body: none
+  auth: none
+}
+
+params:query {
+  ~limit: 
+  ~offset: 
+  ~resource_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

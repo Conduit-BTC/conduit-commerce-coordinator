@@ -1,0 +1,32 @@
+meta {
+  name: Update a Inventory Level
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/admin/inventory-items/:id/location-levels/:location_id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  location_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "stocked_quantity": "",
+    "incoming_quantity": ""
+  }
+}

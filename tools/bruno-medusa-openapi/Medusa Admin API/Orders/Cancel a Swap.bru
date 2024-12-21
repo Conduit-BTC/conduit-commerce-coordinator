@@ -1,0 +1,25 @@
+meta {
+  name: Cancel a Swap
+  type: http
+  seq: 23
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/swaps/:swap_id/cancel
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  swap_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

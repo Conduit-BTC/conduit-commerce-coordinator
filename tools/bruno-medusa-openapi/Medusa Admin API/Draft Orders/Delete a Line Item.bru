@@ -1,0 +1,20 @@
+meta {
+  name: Delete a Line Item
+  type: http
+  seq: 8
+}
+
+delete {
+  url: {{baseUrl}}/admin/draft-orders/:id/line-items/:line_id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  line_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

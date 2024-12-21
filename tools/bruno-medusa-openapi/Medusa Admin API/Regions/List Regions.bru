@@ -1,0 +1,25 @@
+meta {
+  name: List Regions
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/regions
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+  ~order: 
+  ~limit: 
+  ~offset: 
+  ~created_at: 
+  ~updated_at: 
+  ~deleted_at: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

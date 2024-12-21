@@ -1,0 +1,41 @@
+meta {
+  name: Update an Inventory Item
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/inventory-items/:id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "hs_code": "",
+    "origin_country": "",
+    "mid_code": "",
+    "material": "",
+    "weight": "",
+    "height": "",
+    "width": "",
+    "length": "",
+    "title": "",
+    "description": "",
+    "thumbnail": "",
+    "requires_shipping": ""
+  }
+}

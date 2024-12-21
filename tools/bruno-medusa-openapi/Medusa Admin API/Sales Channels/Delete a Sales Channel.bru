@@ -1,0 +1,19 @@
+meta {
+  name: Delete a Sales Channel
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/admin/sales-channels/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

@@ -1,0 +1,33 @@
+meta {
+  name: Update a Stock Location
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/stock-locations/:id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "address_id": "",
+    "metadata": {},
+    "address": ""
+  }
+}

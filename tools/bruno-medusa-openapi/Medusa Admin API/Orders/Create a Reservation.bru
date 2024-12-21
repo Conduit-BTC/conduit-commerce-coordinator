@@ -1,0 +1,27 @@
+meta {
+  name: Create a Reservation
+  type: http
+  seq: 16
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/line-items/:line_item_id/reserve
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+  line_item_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "location_id": "",
+    "quantity": ""
+  }
+}

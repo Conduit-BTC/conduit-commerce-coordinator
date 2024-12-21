@@ -1,0 +1,19 @@
+meta {
+  name: Confirm an OrderEdit
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/admin/order-edits/:id/confirm
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

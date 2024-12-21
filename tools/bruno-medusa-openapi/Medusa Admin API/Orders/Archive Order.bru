@@ -1,0 +1,24 @@
+meta {
+  name: Archive Order
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/archive
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

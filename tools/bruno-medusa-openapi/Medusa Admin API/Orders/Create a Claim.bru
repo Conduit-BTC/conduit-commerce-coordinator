@@ -1,0 +1,63 @@
+meta {
+  name: Create a Claim
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/claims
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "type": "",
+    "claim_items": [
+      {
+        "item_id": "",
+        "quantity": "",
+        "note": "",
+        "reason": "",
+        "tags": [],
+        "images": ""
+      }
+    ],
+    "return_shipping": {
+      "option_id": "",
+      "price": ""
+    },
+    "additional_items": [
+      {
+        "variant_id": "",
+        "quantity": ""
+      }
+    ],
+    "shipping_methods": [
+      {
+        "id": "",
+        "option_id": "",
+        "price": "",
+        "data": {}
+      }
+    ],
+    "shipping_address": "",
+    "refund_amount": "",
+    "no_notification": "",
+    "return_location_id": "",
+    "metadata": {}
+  }
+}

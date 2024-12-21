@@ -1,0 +1,19 @@
+meta {
+  name: Get a Draft Order
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/admin/draft-orders/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

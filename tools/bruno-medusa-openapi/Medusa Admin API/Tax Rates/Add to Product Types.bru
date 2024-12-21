@@ -1,0 +1,30 @@
+meta {
+  name: Add to Product Types
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/tax-rates/:id/product-types/batch
+  body: json
+  auth: none
+}
+
+params:query {
+  ~fields: 
+  ~expand: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "product_types": []
+  }
+}

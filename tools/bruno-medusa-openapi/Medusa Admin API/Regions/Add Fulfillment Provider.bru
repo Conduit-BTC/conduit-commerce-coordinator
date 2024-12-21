@@ -1,0 +1,25 @@
+meta {
+  name: Add Fulfillment Provider
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/admin/regions/:id/fulfillment-providers
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "provider_id": ""
+  }
+}

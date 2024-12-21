@@ -1,0 +1,40 @@
+meta {
+  name: List Products
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/admin/price-lists/:id/products
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+  ~id: 
+  ~status: 
+  ~collection_id: 
+  ~tags: 
+  ~title: 
+  ~description: 
+  ~handle: 
+  ~is_giftcard: 
+  ~type: 
+  ~order: 
+  ~created_at: 
+  ~updated_at: 
+  ~deleted_at: 
+  ~offset: 
+  ~limit: 
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

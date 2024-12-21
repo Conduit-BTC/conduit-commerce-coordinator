@@ -1,0 +1,25 @@
+meta {
+  name: Remove Stock Location from Sales Channels-
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{baseUrl}}/admin/sales-channels/:id/stock-locations
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "location_id": ""
+  }
+}

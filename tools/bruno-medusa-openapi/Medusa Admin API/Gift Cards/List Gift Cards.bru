@@ -1,0 +1,22 @@
+meta {
+  name: List Gift Cards
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/gift-cards
+  body: none
+  auth: none
+}
+
+params:query {
+  ~offset: 
+  ~limit: 
+  ~q: 
+  ~order: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

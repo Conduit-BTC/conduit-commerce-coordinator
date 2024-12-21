@@ -1,0 +1,99 @@
+meta {
+  name: Create a Product
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/products
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "title": "",
+    "subtitle": "",
+    "description": "",
+    "is_giftcard": "",
+    "discountable": "",
+    "images": [],
+    "thumbnail": "",
+    "handle": "",
+    "status": "",
+    "type": {
+      "id": "",
+      "value": ""
+    },
+    "collection_id": "",
+    "tags": [
+      {
+        "id": "",
+        "value": ""
+      }
+    ],
+    "sales_channels": [
+      {
+        "id": ""
+      }
+    ],
+    "categories": [
+      {
+        "id": ""
+      }
+    ],
+    "options": [
+      {
+        "title": ""
+      }
+    ],
+    "variants": [
+      {
+        "title": "",
+        "sku": "",
+        "ean": "",
+        "upc": "",
+        "barcode": "",
+        "hs_code": "",
+        "inventory_quantity": "",
+        "allow_backorder": "",
+        "manage_inventory": "",
+        "weight": "",
+        "length": "",
+        "height": "",
+        "width": "",
+        "origin_country": "",
+        "mid_code": "",
+        "material": "",
+        "metadata": {},
+        "prices": [
+          {
+            "region_id": "",
+            "currency_code": "",
+            "amount": "",
+            "min_quantity": "",
+            "max_quantity": ""
+          }
+        ],
+        "options": [
+          {
+            "value": ""
+          }
+        ]
+      }
+    ],
+    "weight": "",
+    "length": "",
+    "height": "",
+    "width": "",
+    "hs_code": "",
+    "origin_country": "",
+    "mid_code": "",
+    "material": "",
+    "metadata": {}
+  }
+}

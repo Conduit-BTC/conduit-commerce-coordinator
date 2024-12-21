@@ -1,0 +1,25 @@
+meta {
+  name: Update an Order Edit
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/order-edits/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "internal_note": ""
+  }
+}

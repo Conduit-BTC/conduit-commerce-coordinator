@@ -1,0 +1,26 @@
+meta {
+  name: Create a Customer
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/customers
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "password": "",
+    "phone": "",
+    "metadata": {}
+  }
+}

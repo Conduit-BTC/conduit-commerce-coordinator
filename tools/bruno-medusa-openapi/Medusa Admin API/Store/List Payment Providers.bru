@@ -1,0 +1,15 @@
+meta {
+  name: List Payment Providers
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/admin/store/payment-providers
+  body: none
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

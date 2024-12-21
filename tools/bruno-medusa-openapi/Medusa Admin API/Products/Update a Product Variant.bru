@@ -1,0 +1,58 @@
+meta {
+  name: Update a Product Variant
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{baseUrl}}/admin/products/:id/variants/:variant_id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+  variant_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "title": "",
+    "sku": "",
+    "ean": "",
+    "upc": "",
+    "barcode": "",
+    "hs_code": "",
+    "inventory_quantity": "",
+    "allow_backorder": "",
+    "manage_inventory": "",
+    "weight": "",
+    "length": "",
+    "height": "",
+    "width": "",
+    "origin_country": "",
+    "mid_code": "",
+    "material": "",
+    "metadata": {},
+    "prices": [
+      {
+        "id": "",
+        "region_id": "",
+        "currency_code": "",
+        "amount": "",
+        "min_quantity": "",
+        "max_quantity": ""
+      }
+    ],
+    "options": [
+      {
+        "option_id": "",
+        "value": ""
+      }
+    ]
+  }
+}

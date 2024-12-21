@@ -1,0 +1,29 @@
+meta {
+  name: Remove Customers from Group
+  type: http
+  seq: 8
+}
+
+delete {
+  url: {{baseUrl}}/admin/customer-groups/:id/customers/batch
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "customer_ids": [
+      {
+        "id": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Remove a Currency
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/admin/store/currencies/:code
+  body: none
+  auth: none
+}
+
+params:path {
+  code: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

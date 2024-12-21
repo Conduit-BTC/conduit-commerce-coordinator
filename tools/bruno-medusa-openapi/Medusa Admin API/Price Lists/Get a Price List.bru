@@ -1,0 +1,19 @@
+meta {
+  name: Get a Price List
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/admin/price-lists/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

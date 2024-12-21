@@ -1,0 +1,20 @@
+meta {
+  name: Delete a Product Variant
+  type: http
+  seq: 15
+}
+
+delete {
+  url: {{baseUrl}}/admin/products/:id/variants/:variant_id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  variant_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

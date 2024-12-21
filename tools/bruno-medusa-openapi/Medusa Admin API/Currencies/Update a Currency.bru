@@ -1,0 +1,25 @@
+meta {
+  name: Update a Currency
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/currencies/:code
+  body: json
+  auth: none
+}
+
+params:path {
+  code: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "includes_tax": ""
+  }
+}

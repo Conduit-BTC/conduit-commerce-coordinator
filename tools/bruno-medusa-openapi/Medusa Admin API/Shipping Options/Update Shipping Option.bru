@@ -1,0 +1,36 @@
+meta {
+  name: Update Shipping Option
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/shipping-options/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "amount": "",
+    "admin_only": "",
+    "metadata": {},
+    "requirements": [
+      {
+        "id": "",
+        "type": "",
+        "amount": ""
+      }
+    ],
+    "includes_tax": ""
+  }
+}

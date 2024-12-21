@@ -1,0 +1,48 @@
+meta {
+  name: Update an Order
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "email": "",
+    "billing_address": "",
+    "shipping_address": "",
+    "items": [],
+    "region": "",
+    "discounts": [],
+    "customer_id": "",
+    "payment_method": {
+      "provider_id": "",
+      "data": {}
+    },
+    "shipping_method": {
+      "provider_id": "",
+      "profile_id": "",
+      "price": "",
+      "data": {},
+      "items": []
+    },
+    "no_notification": ""
+  }
+}

@@ -1,0 +1,19 @@
+meta {
+  name: List Fulfillment Options
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/admin/regions/:id/fulfillment-options
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

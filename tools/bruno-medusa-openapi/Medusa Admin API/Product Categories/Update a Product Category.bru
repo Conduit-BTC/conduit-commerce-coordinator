@@ -1,0 +1,37 @@
+meta {
+  name: Update a Product Category
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/product-categories/:id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "description": "",
+    "handle": "",
+    "is_internal": "",
+    "is_active": "",
+    "parent_category_id": "",
+    "rank": "",
+    "metadata": {}
+  }
+}

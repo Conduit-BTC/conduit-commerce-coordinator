@@ -1,0 +1,40 @@
+meta {
+  name: Update a Customer
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/customers/:id
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "phone": "",
+    "password": "",
+    "groups": [
+      {
+        "id": ""
+      }
+    ],
+    "metadata": {}
+  }
+}

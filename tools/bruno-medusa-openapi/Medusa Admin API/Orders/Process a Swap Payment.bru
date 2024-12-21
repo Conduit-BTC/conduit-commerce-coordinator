@@ -1,0 +1,25 @@
+meta {
+  name: Process a Swap Payment
+  type: http
+  seq: 26
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/swaps/:swap_id/process-payment
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  swap_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

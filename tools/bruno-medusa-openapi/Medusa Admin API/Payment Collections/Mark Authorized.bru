@@ -1,0 +1,19 @@
+meta {
+  name: Mark Authorized
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/payment-collections/:id/authorize
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

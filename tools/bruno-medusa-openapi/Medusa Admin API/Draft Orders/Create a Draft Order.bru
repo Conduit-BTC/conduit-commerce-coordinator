@@ -1,0 +1,49 @@
+meta {
+  name: Create a Draft Order
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/draft-orders
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "status": "",
+    "email": "",
+    "billing_address": "",
+    "shipping_address": "",
+    "items": [
+      {
+        "variant_id": "",
+        "unit_price": "",
+        "title": "",
+        "quantity": "",
+        "metadata": {}
+      }
+    ],
+    "region_id": "",
+    "discounts": [
+      {
+        "code": ""
+      }
+    ],
+    "customer_id": "",
+    "no_notification_order": "",
+    "shipping_methods": [
+      {
+        "option_id": "",
+        "data": {},
+        "price": ""
+      }
+    ],
+    "metadata": {}
+  }
+}

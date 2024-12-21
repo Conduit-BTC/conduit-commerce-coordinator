@@ -1,0 +1,36 @@
+meta {
+  name: List Inventory Items
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/inventory-items
+  body: none
+  auth: none
+}
+
+params:query {
+  ~offset: 
+  ~limit: 
+  ~expand: 
+  ~fields: 
+  ~q: 
+  ~order: 
+  ~location_id: 
+  ~id: 
+  ~sku: 
+  ~origin_country: 
+  ~mid_code: 
+  ~material: 
+  ~hs_code: 
+  ~weight: 
+  ~length: 
+  ~height: 
+  ~width: 
+  ~requires_shipping: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

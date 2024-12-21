@@ -1,0 +1,28 @@
+meta {
+  name: List Product Categories
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/product-categories
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+  ~handle: 
+  ~is_internal: 
+  ~is_active: 
+  ~include_descendants_tree: 
+  ~parent_category_id: 
+  ~offset: 
+  ~limit: 
+  ~expand: 
+  ~fields: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

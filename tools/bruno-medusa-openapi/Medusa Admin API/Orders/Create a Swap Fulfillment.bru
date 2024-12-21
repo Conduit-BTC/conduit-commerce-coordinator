@@ -1,0 +1,33 @@
+meta {
+  name: Create a Swap Fulfillment
+  type: http
+  seq: 24
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/swaps/:swap_id/fulfillments
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  swap_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "metadata": {},
+    "no_notification": "",
+    "location_id": ""
+  }
+}

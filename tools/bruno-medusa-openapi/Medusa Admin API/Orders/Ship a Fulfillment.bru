@@ -1,0 +1,32 @@
+meta {
+  name: Ship a Fulfillment
+  type: http
+  seq: 20
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/shipment
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "fulfillment_id": "",
+    "tracking_numbers": [],
+    "no_notification": ""
+  }
+}

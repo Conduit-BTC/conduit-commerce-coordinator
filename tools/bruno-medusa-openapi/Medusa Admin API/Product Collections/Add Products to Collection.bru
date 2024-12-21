@@ -1,0 +1,25 @@
+meta {
+  name: Add Products to Collection
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/collections/:id/products/batch
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "product_ids": []
+  }
+}

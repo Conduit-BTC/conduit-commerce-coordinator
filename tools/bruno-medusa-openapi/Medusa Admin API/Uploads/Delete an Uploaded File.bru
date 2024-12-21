@@ -1,0 +1,21 @@
+meta {
+  name: Delete an Uploaded File
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{baseUrl}}/admin/uploads
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "file_key": ""
+  }
+}

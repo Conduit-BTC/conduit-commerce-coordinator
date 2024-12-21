@@ -1,0 +1,35 @@
+meta {
+  name: Create a Condition
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/discounts/:discount_id/conditions
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  discount_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "operator": "",
+    "products": [],
+    "product_types": [],
+    "product_collections": [],
+    "product_tags": [],
+    "customer_groups": []
+  }
+}

@@ -1,0 +1,27 @@
+meta {
+  name: List Product Types
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/product-types
+  body: none
+  auth: none
+}
+
+params:query {
+  ~limit: 
+  ~offset: 
+  ~order: 
+  ~discount_condition_id: 
+  ~value: 
+  ~id: 
+  ~q: 
+  ~created_at: 
+  ~updated_at: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

@@ -1,0 +1,26 @@
+meta {
+  name: Update a Product Option
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/admin/products/:id/options/:option_id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+  option_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "title": ""
+  }
+}

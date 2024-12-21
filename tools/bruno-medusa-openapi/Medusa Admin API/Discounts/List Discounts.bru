@@ -1,0 +1,28 @@
+meta {
+  name: List Discounts
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/discounts
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+  ~rule: 
+  ~is_dynamic: 
+  ~is_disabled: 
+  ~limit: 
+  ~offset: 
+  ~expand: 
+  ~order: 
+  ~created_at: 
+  ~updated_at: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

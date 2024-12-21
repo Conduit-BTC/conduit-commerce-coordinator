@@ -1,0 +1,25 @@
+meta {
+  name: Add Payment Provider
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/admin/regions/:id/payment-providers
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "provider_id": ""
+  }
+}

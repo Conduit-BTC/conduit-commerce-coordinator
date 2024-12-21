@@ -1,0 +1,36 @@
+meta {
+  name: Update a Draft Order
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/draft-orders/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "region_id": "",
+    "country_code": "",
+    "email": "",
+    "billing_address": "",
+    "shipping_address": "",
+    "discounts": [
+      {
+        "code": ""
+      }
+    ],
+    "no_notification_order": "",
+    "customer_id": ""
+  }
+}

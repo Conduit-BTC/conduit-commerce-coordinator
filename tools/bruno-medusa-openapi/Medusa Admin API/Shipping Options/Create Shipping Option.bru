@@ -1,0 +1,37 @@
+meta {
+  name: Create Shipping Option
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/shipping-options
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "name": "",
+    "region_id": "",
+    "provider_id": "",
+    "profile_id": "",
+    "data": {},
+    "price_type": "",
+    "amount": "",
+    "requirements": [
+      {
+        "type": "",
+        "amount": ""
+      }
+    ],
+    "is_return": "",
+    "admin_only": "",
+    "metadata": {},
+    "includes_tax": ""
+  }
+}

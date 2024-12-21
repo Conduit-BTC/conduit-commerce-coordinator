@@ -1,0 +1,30 @@
+meta {
+  name: Add to Shipping Options
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/admin/tax-rates/:id/shipping-options/batch
+  body: json
+  auth: none
+}
+
+params:query {
+  ~fields: 
+  ~expand: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "shipping_options": []
+  }
+}

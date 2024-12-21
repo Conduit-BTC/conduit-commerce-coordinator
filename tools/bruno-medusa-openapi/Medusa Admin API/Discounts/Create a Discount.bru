@@ -1,0 +1,50 @@
+meta {
+  name: Create a Discount
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/discounts
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "code": "",
+    "is_dynamic": "",
+    "rule": {
+      "description": "",
+      "type": "",
+      "value": "",
+      "allocation": "",
+      "conditions": [
+        {
+          "operator": "",
+          "products": [],
+          "product_types": [],
+          "product_collections": [],
+          "product_tags": [],
+          "customer_groups": []
+        }
+      ]
+    },
+    "is_disabled": "",
+    "starts_at": "",
+    "ends_at": "",
+    "valid_duration": "",
+    "regions": [],
+    "usage_limit": "",
+    "metadata": {}
+  }
+}

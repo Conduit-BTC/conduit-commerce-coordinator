@@ -1,0 +1,36 @@
+meta {
+  name: Add or Update Prices
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/admin/price-lists/:id/prices/batch
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "prices": [
+      {
+        "id": "",
+        "region_id": "",
+        "currency_code": "",
+        "variant_id": "",
+        "amount": "",
+        "min_quantity": "",
+        "max_quantity": ""
+      }
+    ],
+    "override": ""
+  }
+}

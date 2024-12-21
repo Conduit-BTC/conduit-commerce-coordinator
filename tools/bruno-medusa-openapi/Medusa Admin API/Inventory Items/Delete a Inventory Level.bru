@@ -1,0 +1,20 @@
+meta {
+  name: Delete a Inventory Level
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{baseUrl}}/admin/inventory-items/:id/location-levels/:location_id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+  location_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

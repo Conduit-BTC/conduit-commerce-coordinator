@@ -1,0 +1,27 @@
+meta {
+  name: List Publishable API keys
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/publishable-api-keys
+  body: none
+  auth: none
+}
+
+params:query {
+  ~q: 
+  ~limit: 
+  ~offset: 
+  ~expand: 
+  ~fields: 
+  ~order: 
+  ~created_at: 
+  ~updated_at: 
+  ~revoked_at: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

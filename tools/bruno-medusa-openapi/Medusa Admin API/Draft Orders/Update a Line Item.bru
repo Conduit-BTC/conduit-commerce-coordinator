@@ -1,0 +1,29 @@
+meta {
+  name: Update a Line Item
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/admin/draft-orders/:id/line-items/:line_id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+  line_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "unit_price": "",
+    "title": "",
+    "quantity": "",
+    "metadata": {}
+  }
+}

@@ -1,0 +1,27 @@
+meta {
+  name: List Notifications
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/notifications
+  body: none
+  auth: none
+}
+
+params:query {
+  ~offset: 
+  ~limit: 
+  ~fields: 
+  ~expand: 
+  ~event_name: 
+  ~resource_type: 
+  ~resource_id: 
+  ~to: 
+  ~include_resends: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

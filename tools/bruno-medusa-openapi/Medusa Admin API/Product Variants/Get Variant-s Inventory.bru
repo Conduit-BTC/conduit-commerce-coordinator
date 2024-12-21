@@ -1,0 +1,19 @@
+meta {
+  name: Get Variant-s Inventory
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/admin/variants/:id/inventory
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

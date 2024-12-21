@@ -1,0 +1,32 @@
+meta {
+  name: Receive a Return
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/admin/returns/:id/receive
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "items": [
+      {
+        "item_id": "",
+        "quantity": ""
+      }
+    ],
+    "refund": "",
+    "location_id": ""
+  }
+}

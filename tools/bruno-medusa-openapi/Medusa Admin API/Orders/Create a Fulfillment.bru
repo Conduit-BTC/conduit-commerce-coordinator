@@ -1,0 +1,38 @@
+meta {
+  name: Create a Fulfillment
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/fulfillment
+  body: json
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "items": [
+      {
+        "item_id": "",
+        "quantity": ""
+      }
+    ],
+    "location_id": "",
+    "no_notification": "",
+    "metadata": {}
+  }
+}

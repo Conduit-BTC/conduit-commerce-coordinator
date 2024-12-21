@@ -1,0 +1,25 @@
+meta {
+  name: Cancel a Fulfilmment
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{baseUrl}}/admin/orders/:id/fulfillments/:fulfillment_id/cancel
+  body: none
+  auth: none
+}
+
+params:query {
+  ~expand: 
+  ~fields: 
+}
+
+params:path {
+  id: 
+  fulfillment_id: 
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}

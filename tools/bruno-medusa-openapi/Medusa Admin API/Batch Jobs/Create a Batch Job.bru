@@ -1,0 +1,23 @@
+meta {
+  name: Create a Batch Job
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/batch-jobs
+  body: json
+  auth: none
+}
+
+headers {
+  x-medusa-access-token: {{apiKey}}
+}
+
+body:json {
+  {
+    "type": "",
+    "context": {},
+    "dry_run": ""
+  }
+}
