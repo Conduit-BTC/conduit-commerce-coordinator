@@ -1,4 +1,4 @@
-import NDK, { NDKPrivateKeySigner, NDKRelay } from "@nostr-dev-kit/ndk";
+import NDK, { NDKPrivateKeySigner } from "@nostr-dev-kit/ndk";
 import "websocket-polyfill";
 
 export class NDKService {
@@ -67,7 +67,6 @@ export class NDKService {
     }
 }
 
-// Usage example:
 export async function getNdk(): Promise<NDK> {
     const service = NDKService.getInstance();
     return await service.initialize();
