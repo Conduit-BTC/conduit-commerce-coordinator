@@ -39,38 +39,38 @@ export default function medusaToNostrProduct(medusaProduct, stallId = "default-s
 }
 
 // Example usage:
-const medusaProduct = {
-    "id": "prod_01JFBVVFKV2JB6X33RRG34928Z",
-    "title": "Medusa T-Shirt",
-    "description": "Reimagine the feeling of a classic T-shirt. With our cotton T-shirts, everyday essentials no longer have to be ordinary.",
-    "options": [
-        {
-            "title": "Color",
-            "values": [
-                { "value": "Black" },
-                { "value": "White" }
-            ]
-        },
-        {
-            "title": "Size",
-            "values": [
-                { "value": "S" },
-                { "value": "M" },
-                { "value": "L" },
-                { "value": "XL" }
-            ]
-        }
-    ],
-    "images": [
-        {
-            "url": "https://medusa-public-images.s3.eu-west-1.amazonaws.com/tee-black-front.png"
-        },
-        // ... other images
-    ],
-    "categories": [
-        {
-            "handle": "shirts",
-            "name": "Shirts"
-        }
-    ]
-};
+// const medusaProduct = {
+//     "id": "prod_01JFBVVFKV2JB6X33RRG34928Z",
+//     "title": "Medusa T-Shirt",
+//     "description": "Reimagine the feeling of a classic T-shirt. With our cotton T-shirts, everyday essentials no longer have to be ordinary.",
+//     "options": [
+//         {
+//             "title": "Color",
+//             "values": [
+//                 { "value": "Black" },
+//                 { "value": "White" }
+//             ]
+//         },
+//         {
+//             "title": "Size",
+//             "values": [
+//                 { "value": "S" },
+//                 { "value": "M" },
+//                 { "value": "L" },
+//                 { "value": "XL" }
+//             ]
+//         }
+//     ],
+//     "images": [
+//         {
+//             "url": "https://medusa-public-images.s3.eu-west-1.amazonaws.com/tee-black-front.png"
+//         },
+//         // ... other images
+//     ],
+//     "categories": [
+//         {
+//             "handle": "shirts",
+//             "name": "Shirts"
+//         }
+//     ]
+// };
