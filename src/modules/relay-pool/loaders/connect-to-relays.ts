@@ -14,7 +14,7 @@ if (!global.WebSocket) {
 export default async function connectToRelaysLoader({
     container,
 }: LoaderOptions) {
-    if (process.env.DISABLE_WEBSOCKETS === 'true' || process.env.DISABLE_ORDER_FETCHING === 'true') return;
+    if (process.env.DISABLE_ORDER_FETCHING === 'true') return;
 
     const logger: Logger = container.resolve("logger")
     const { NRelay1, NSchema: n } = await import('@nostrify/nostrify')

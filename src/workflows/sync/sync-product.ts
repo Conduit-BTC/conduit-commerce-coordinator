@@ -1,10 +1,9 @@
-import medusaToNostrProduct from "@/utils/medusaToNostrProduct";
+import medusaToNostrProduct from "@/utils/medusaProductToNostrProduct";
 import { getNdk } from "@/utils/NdkService"
 import {
     createStep, StepResponse, createWorkflow,
     WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
-import { AdminProduct } from "@medusajs/framework/types";
 import { Product } from ".medusa/types/remote-query-entry-points";
 import { NDKEvent } from "@nostr-dev-kit/ndk";
 
@@ -22,8 +21,6 @@ const step1 = createStep(
         ndkEvent.kind = 30018;
         ndkEvent.content = JSON.stringify(nostrProduct.content);
         ndkEvent.tags = nostrProduct.tags;
-
-        console.log('NDK connection status:', ndk.pool.stats());
 
         await ndkEvent.sign();
 

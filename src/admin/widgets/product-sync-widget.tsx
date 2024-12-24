@@ -1,53 +1,52 @@
 import { useEffect, useState } from "react";
 import { useSubscription } from "nostr-hooks";
 import type NDK from "@nostr-dev-kit/ndk";
-import { NDKEvent } from "@nostr-dev-kit/ndk";
 import { defineWidgetConfig } from "@medusajs/admin-sdk";
 import { Button, Container, Heading } from "@medusajs/ui";
 import useNdkConnection from "../../hooks/useNdkConnection";
 import { AdminProduct, DetailWidgetProps } from "@medusajs/framework/types";
-import medusaToNostrProduct from "../../utils/medusaToNostrProduct";
 
 const SyncWidget = ({
     data,
 }: DetailWidgetProps<AdminProduct>) => {
-    const { ndk } = useNdkConnection();
-    const [onRelay, setOnRelay] = useState(false);
-    const [connected, setConnected] = useState(false);
+    console.log("Product: ", data);
 
-    const subId = "all-events";
-    const { events, isLoading, createSubscription, subscription } =
-        useSubscription(subId);
+    // const { ndk } = useNdkConnection();
+    // const [onRelay, setOnRelay] = useState(false);
+    // const [connected, setConnected] = useState(false);
 
-    useEffect(() => {
-        const filters = {
-            filters: [{
-                kinds: [30018],
-                limit: 50,
-            }],
-        };
+    // const subId = "all-events";
+    // const { events, isLoading, createSubscription } = useSubscription(subId);
 
-        createSubscription(filters);
-    }, []);
+    // useEffect(() => {
+    //     const filters = {
+    //         filters: [{
+    //             kinds: [30018],
+    //             limit: 50,
+    //         }],
+    //     };
 
-    useEffect(() => {
-        if (!events) return;
-        setOnRelay(isProductOnRelay(events, data));
-    }, [events]);
+    //     createSubscription(filters);
+    // }, []);
 
-    useEffect(() => {
-        if (ndk) setConnected(true);
-    }, [ndk]);
+    // useEffect(() => {
+    //     if (!events) return;
+    //     setOnRelay(isProductOnRelay(events, data));
+    // }, [events]);
 
-    if (isLoading) return <LoadingState />;
+    // useEffect(() => {
+    //     if (ndk) setConnected(true);
+    // }, [ndk]);
 
-    if (!connected) return <ErrorState error="Connection issue..." />;
+    // if (isLoading) return <LoadingState />;
+
+    // if (!connected) return <ErrorState error="Connection issue..." />;
 
     return (
         <Container className="divide-y p-0">
             <div className="px-6 py-4">
                 <Heading level="h1">Relay Sync Status</Heading>
-                <RelayStatus onRelay={onRelay} product={data} ndk={ndk} />
+                {/* <RelayStatus onRelay={onRelay} product={data} ndk={ndk} /> */}
             </div>
         </Container>
     );
@@ -108,7 +107,7 @@ const RelayStatus = (
                 : (
                     <Button
                         className="mt-4"
-                        onClick={() => postProductToRelay(product, ndk)}
+                        onClick={() => console.log(product, ndk)}
                     >
                         Sync
                     </Button>
@@ -117,24 +116,6 @@ const RelayStatus = (
     );
 };
 
-const postProductToRelay = (
-    product: AdminProduct,
-    ndk: NDK,
-): { success: boolean; error?: string } => {
-    const nostrProduct = medusaToNostrProduct(product, "clothing-stall");
-    console.log(JSON.stringify(nostrProduct, null, 2));
-
-    const ndkEvent = new NDKEvent(ndk);
-    ndkEvent.kind = 30018;
-    ndkEvent.content = JSON.stringify(nostrProduct.content);
-    ndkEvent.tags = nostrProduct.tags;
-
-    ndkEvent.publish();
-
-    return { success: true };
-};
-
-// The widget's configurations
 export const config = defineWidgetConfig({
     zone: "product.details.before",
 });

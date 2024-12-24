@@ -10,7 +10,7 @@ export default async function orderPlacedHandler({
 
     const { data: products } = await query.graph({
         entity: "product",
-        fields: ["*"],
+        fields: ["*", "images.*", "variants.*", "options.*", "categories.*"],
         filters: {
             id: data.id,
         },

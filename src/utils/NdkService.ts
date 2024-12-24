@@ -1,3 +1,4 @@
+import { DEFAULT_RELAYS } from "@/lib/constants/defaultRelays";
 import NDK, { NDKPrivateKeySigner } from "@nostr-dev-kit/ndk";
 import "websocket-polyfill";
 
@@ -14,14 +15,14 @@ export class NDKService {
         return NDKService.instance;
     }
 
-    public initialize(): Promise<NDK> {
+    public initialize(relayPool: string[]): Promise<NDK> {
         if (this.ndk) return Promise.resolve(this.ndk);
         const privkey = process.env.PRIVKEY;
         if (!privkey) throw new Error("PRIVKEY not found in .env");
         const signer = new NDKPrivateKeySigner(privkey);
 
         this.ndk = new NDK({
-            explicitRelayUrls: ["ws://localhost:7777"],
+            explicitRelayUrls: relayPool,
             signer,
         });
 
@@ -54,20 +55,13 @@ export class NDKService {
         });
     }
 
-    public getNDK(): NDK {
-        if (!this.ndk) {
-            throw new Error("NDK not initialized. Call initialize() first.");
-        }
-        return this.ndk;
-    }
-
     // Method to reset the instance (mainly for testing purposes)
     public static reset(): void {
         NDKService.instance = null;
     }
 }
 
-export async function getNdk(): Promise<NDK> {
+export async function getNdk(relayPool: string[] = DEFAULT_RELAYS): Promise<NDK> {
     const service = NDKService.getInstance();
-    return await service.initialize();
+    return await service.initialize(relayPool);
 }
