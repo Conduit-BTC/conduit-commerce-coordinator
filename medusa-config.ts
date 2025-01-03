@@ -17,5 +17,8 @@ module.exports = defineConfig({
     {
       resolve: "./src/modules/relay-pool"
     },
+    {
+      resolve: "./src/modules/nostr-events"
+    },
   ]
 })

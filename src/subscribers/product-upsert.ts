@@ -1,5 +1,5 @@
 import { SubscriberArgs, type SubscriberConfig } from "@medusajs/framework"
-import syncProduct from "../workflows/sync/sync-product"
+import syncProductUpsert from "../workflows/sync/sync-product-upsert"
 
 export default async function orderPlacedHandler({
     event: { data },
@@ -23,7 +23,7 @@ export default async function orderPlacedHandler({
         return
     }
 
-    await syncProduct(container)
+    await syncProductUpsert(container)
         .run({
             input: {
                 product
