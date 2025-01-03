@@ -1,0 +1,15 @@
+meta {
+  name: Broadcast Delete Product Event
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{API_URL}}/sync/products/broadcast-delete-product-event/:eventId
+  body: none
+  auth: none
+}
+
+params:path {
+  eventId: 
+}
