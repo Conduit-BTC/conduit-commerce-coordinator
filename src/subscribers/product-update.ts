@@ -1,5 +1,5 @@
 import { SubscriberArgs, type SubscriberConfig } from "@medusajs/framework"
-import syncProductUpsert from "../workflows/sync/sync-product-upsert"
+import syncProductUpdate from "../workflows/sync/sync-product-update"
 
 export default async function orderPlacedHandler({
     event: { data },
@@ -19,11 +19,11 @@ export default async function orderPlacedHandler({
     const product = products[0]
 
     if (!product) {
-        logger.error(`[subscriber:product-upsert] Product not found: ${data.id}`)
+        logger.error(`[subscriber:product-updated] Product not found: ${data.id}`)
         return
     }
 
-    await syncProductUpsert(container)
+    await syncProductUpdate(container)
         .run({
             input: {
                 product
@@ -32,5 +32,5 @@ export default async function orderPlacedHandler({
 }
 
 export const config: SubscriberConfig = {
-    event: ["product.created", "product.updated"],
+    event: ["product.updated"],
 }

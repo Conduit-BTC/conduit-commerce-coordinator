@@ -6,6 +6,15 @@
   "tables": [
     {
       "columns": {
+        "medusaProductId": {
+          "name": "medusaProductId",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
         "id": {
           "name": "id",
           "type": "text",
@@ -107,7 +116,7 @@
         {
           "keyName": "product-nostr-event_pkey",
           "columnNames": [
-            "id"
+            "medusaProductId"
           ],
           "composite": false,
           "primary": true,
