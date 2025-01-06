@@ -1,18 +1,20 @@
-export function sanitizeDecryptedMessage(decrypted: string): string {
-    let sanitized = decrypted
-        // Remove all whitespace between tokens while preserving necessary spaces
-        .replace(/\s+/g, '')
-        // Add back necessary spaces in address and messages
-        .replace(/,([A-Za-z])/g, ', $1')
-        // Handle any trailing commas
-        .replace(/,}/g, '}')
-        .replace(/,]/g, ']')
-        .trim();
+export function sanitizeDecryptedMessage(decrypted: string): object {
+    try {
+        // Parse the initial string
+        const obj = JSON.parse(decrypted);
 
-    // Remove trailing comma at the end if it exists
-    if (sanitized.endsWith(',')) {
-        sanitized = sanitized.slice(0, -1);
+        // If address is a string, parse it into an object
+        if (obj.address && typeof obj.address === 'string') {
+            try {
+                obj.address = JSON.parse(obj.address);
+            } catch (e) {
+                console.warn('Failed to parse address field:', e);
+            }
+        }
+
+        return obj;
+    } catch (e) {
+        console.warn('Failed to parse JSON:', e);
+        throw new Error('Failed to parse message');
     }
-
-    return sanitized;
 }

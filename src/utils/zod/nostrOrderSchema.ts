@@ -1,14 +1,26 @@
 import { z } from "zod";
 
 const hexString = z.string()
-    .refine(val => /^[0-9a-f]{62}$/i.test(val), {
-        message: "Must be a 62-character hex string"
+    .refine(val => /^[0-9a-f]{64}$/i.test(val), {  // Updated to 64 characters
+        message: "Must be a 64-character hex string"
     });
 
 const ContactSchema = z.object({
     nostr: hexString,
-    phone: z.string().optional(),
-    email: z.string().email().optional(),
+    phone: z.string().optional().nullable(),
+    email: z.string().email().optional().nullable(),
+});
+
+// New Address Schema
+const AddressSchema = z.object({
+    first_name: z.string(),
+    last_name: z.string(),
+    address1: z.string(),
+    address2: z.string(),
+    city: z.string(),
+    state: z.string(),
+    zip: z.string(),
+    special_instructions: z.string(),
 });
 
 const BaseOrderSchema = z.object({
@@ -19,13 +31,13 @@ const BaseOrderSchema = z.object({
 
 const OptionalOrderFields = z.object({
     name: z.string().optional(),
-    address: z.string().optional(),
+    address: AddressSchema,  // Updated to use AddressSchema
     message: z.string().optional(),
     items: z.array(z.object({
         product_id: z.string(),
         quantity: z.number().int().positive(),
-    })).optional(),
-    shipping_id: z.string().optional(),
+    })),  // Made required since it appears in your data
+    shipping_id: z.string(),  // Made required since it appears in your data
 });
 
 const CustomerOrderSchema = BaseOrderSchema.merge(OptionalOrderFields);
