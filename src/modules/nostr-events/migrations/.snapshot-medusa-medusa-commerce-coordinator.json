@@ -93,19 +93,19 @@
           "mappedType": "datetime"
         }
       },
-      "name": "order-nostr-event",
+      "name": "order_nostr_event",
       "schema": "public",
       "indexes": [
         {
-          "keyName": "IDX_order-nostr-event_deleted_at",
+          "keyName": "IDX_order_nostr_event_deleted_at",
           "columnNames": [],
           "composite": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_order-nostr-event_deleted_at\" ON \"order-nostr-event\" (deleted_at) WHERE deleted_at IS NULL"
+          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_order_nostr_event_deleted_at\" ON \"order_nostr_event\" (deleted_at) WHERE deleted_at IS NULL"
         },
         {
-          "keyName": "order-nostr-event_pkey",
+          "keyName": "order_nostr_event_pkey",
           "columnNames": [
             "id"
           ],
@@ -215,19 +215,19 @@
           "mappedType": "datetime"
         }
       },
-      "name": "product-nostr-event",
+      "name": "product_nostr_event",
       "schema": "public",
       "indexes": [
         {
-          "keyName": "IDX_product-nostr-event_deleted_at",
+          "keyName": "IDX_product_nostr_event_deleted_at",
           "columnNames": [],
           "composite": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_product-nostr-event_deleted_at\" ON \"product-nostr-event\" (deleted_at) WHERE deleted_at IS NULL"
+          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_product_nostr_event_deleted_at\" ON \"product_nostr_event\" (deleted_at) WHERE deleted_at IS NULL"
         },
         {
-          "keyName": "product-nostr-event_pkey",
+          "keyName": "product_nostr_event_pkey",
           "columnNames": [
             "medusaProductId"
           ],

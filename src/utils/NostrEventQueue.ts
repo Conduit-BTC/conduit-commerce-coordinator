@@ -3,33 +3,42 @@ import {
     Logger,
 } from "@medusajs/framework/types"
 
+export interface QueueEvent {
+    id: string;
+    data: any;
+}
+
 export class NostrEventQueue extends EventEmitter {
     private queue: any[] = []
+    private inFlightEvents: Map<string, QueueEvent> = new Map();
     private processing: boolean = false
+
+    // TODO: Implement delay between events, a max retry mechanism, and a "failed" queue for events that failed to process
 
     constructor(private readonly logger: Logger) {
         super()
     }
 
     push(event: any): void {
-        this.queue.push(event)
-        this.logger.info("Event added to queue: " + JSON.stringify(event))
-        this.emit('itemAdded')
+        const queueEvent: QueueEvent = {
+            id: crypto.randomUUID(),
+            data: event,
+        }
+        this.queue.push(queueEvent)
         this.processQueue()
     }
 
-    private async processQueue(): Promise<void> {
+
+    private processQueue(): void {
         if (this.processing || this.queue.length === 0) return
-
         this.processing = true
-
         try {
             while (this.queue.length > 0) {
                 const event = this.queue[0]
-
                 try {
-                    await this.processEvent(event)
+                    this.inFlightEvents.set(event.id, event)
                     this.queue.shift()
+                    this.emit('processEvent', event)
                 } catch (error) {
                     this.logger.error(`Error processing event: ${error}`)
                     break
@@ -38,13 +47,27 @@ export class NostrEventQueue extends EventEmitter {
         } finally {
             this.processing = false
         }
-
         if (this.queue.length > 0) {
             this.processQueue()
         }
     }
 
-    private async processEvent(event: any): Promise<void> {
-        this.emit('processEvent', event)
+    public confirmProcessed(eventId: string): void {
+        if (!this.inFlightEvents.delete(eventId)) {
+            this.logger.warn(`Attempted to confirm event ${eventId} but it was not found in in-flight events`)
+        }
     }
+
+    public requeueEvent(eventId: string): void {
+        const event = this.inFlightEvents.get(eventId)
+        if (event) {
+            this.queue.push(event)
+            this.inFlightEvents.delete(eventId)
+            this.logger.info(`Event ${eventId} requeued`)
+            this.processQueue()
+        } else {
+            this.logger.warn(`Attempted to requeue event ${eventId} but it was not found in in-flight events`)
+        }
+    }
+
 }

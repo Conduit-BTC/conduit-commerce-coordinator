@@ -1,6 +1,6 @@
 import { model } from '@medusajs/framework/utils';
 
-const ProductNostrEvent = model.define("product-nostr-event", {
+const ProductNostrEvent = model.define("product_nostr_event", {
     medusaProductId: model.text().primaryKey(),
     id: model.text(), // 32-byte hex-encoded sha256
     pubkey: model.text().searchable(), // 32-byte hex-encoded public key
