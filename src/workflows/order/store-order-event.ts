@@ -14,15 +14,6 @@ type WorkflowInput = {
     orderEvent: NDKEvent
 }
 
-const isOrderEventStored = createStep(
-    "is-order-event-stored",
-    async function ({ orderEvent }: WorkflowInput, { container }) {
-        const nostrEventsModuleService: NostrEventsModuleService = container.resolve(NOSTR_EVENTS_MODULE);
-        const order = await nostrEventsModuleService.listOrderNostrEvents({ id: [orderEvent.id] });
-        return new StepResponse({ exists: order.length > 0 });
-    }
-)
-
 const storeOrderEvent = createStep(
     "store-order-event",
     async function ({ orderEvent }: WorkflowInput, { container }) {
@@ -52,14 +43,7 @@ const newOrderEventWorkflow = createWorkflow(
     "new-order-event",
     function (input: WorkflowInput) {
         try {
-            const checkResult = isOrderEventStored(input);
-
-            when(
-                "store-new-order-event",
-                checkResult,
-                (result) => !result.exists
-            ).then(() => storeOrderEvent(input));
-
+            storeOrderEvent(input);
             return new WorkflowResponse({
                 success: true,
                 message: "Order is stored in the database",

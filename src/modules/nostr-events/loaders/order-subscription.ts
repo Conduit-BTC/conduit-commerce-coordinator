@@ -7,7 +7,10 @@ import { NostrEventQueue, QueueEvent } from "@/utils/NostrEventQueue"
 import { validateOrderEvent } from "@/utils/zod/nostrOrderSchema"
 import { sanitizeDecryptedMessage } from "@/utils/sanitizeDecryptedMessage"
 import { getNdk } from "@/utils/NdkService"
-import newOrderEventWorkflow from "@/workflows/order/new-order-event"
+import newOrderEventWorkflow from "@/workflows/order/store-order-event"
+import NostrEventsModuleService from "@/modules/nostr-events/service"
+import { NOSTR_EVENTS_MODULE } from "@/modules/nostr-events"
+import checkOrderEventExistsWorkflow from "@/workflows/order/check-order-event-exists"
 
 function serializeNDKEvent(event: NDKEvent) {
     return {
@@ -38,7 +41,6 @@ export default async function orderSubscriptionLoader({
         return
     }
 
-    // Initialize NDK with relay
     const ndk = await getNdk();
 
     logger.info(`[orderSubscriptionLoader]: Listening to ${relayUrl} for NIP-17 DMs addressed to ${pubkey}`)
@@ -53,8 +55,9 @@ export default async function orderSubscriptionLoader({
     const subscription = ndk.subscribe(filter, { closeOnEose: false })
     const signer = new NDKPrivateKeySigner(privkey);
 
-
     subscription.on('event', async (event: NDKEvent) => {
+        const { result } = await checkOrderEventExistsWorkflow().run({ input: { orderEvent: serializeNDKEvent(event) as NDKEvent } })
+        if (result.exists === true) return; // If event already exists in the database, skip processing
         const serializedEvent = serializeNDKEvent(event);
         queue.push(serializedEvent);
     })
@@ -70,11 +73,17 @@ export default async function orderSubscriptionLoader({
             const sanitizedJson = sanitizeDecryptedMessage(contentJson.content)
             const order = validateOrderEvent(sanitizedJson)
 
-            if (!order.success) return
+            if (!order.success) {
+                // We've determined this is not a valid order event, so we can clear it from the queue
+                queue.confirmProcessed(queueEvent.id);
+                return;
+            }
 
             logger.info(`[orderSubscriptionLoader]: Processing order: ${event.id}`)
+
+            // Store the Order event
             const { result: storeEventResult } = await newOrderEventWorkflow().run({ input: { orderEvent: serializeNDKEvent(event) as NDKEvent } })
-            logger.info(`[orderSubscriptionLoader]: Order processed: ${event.id}`)
+
 
             if (!storeEventResult.success) {
                 logger.error(`[orderSubscriptionLoader]: Failed to process order event: ${storeEventResult.message}`)
