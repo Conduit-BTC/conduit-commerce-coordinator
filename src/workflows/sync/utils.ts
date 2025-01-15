@@ -4,7 +4,7 @@ import {
     createStep, StepResponse
 } from "@medusajs/framework/workflows-sdk"
 import { Product } from ".medusa/types/remote-query-entry-points";
-import { NDKEvent } from "@nostr-dev-kit/ndk";
+import { NDKEvent, NDKTag } from "@nostr-dev-kit/ndk";
 import { NOSTR_EVENTS_MODULE } from "@/modules/nostr-events";
 import type NostrEventsModuleService from "@/modules/nostr-events/service";
 
@@ -20,12 +20,12 @@ export type StoreProductEventStepInput = {
 export const createProductEventStep = createStep(
     "create-product-event",
     async ({ product }: WorkflowInput) => {
-        const nostrProduct = medusaToNostrProduct(product, "coffee-by-conduit-btc");
+        const nostrProduct = medusaToNostrProduct(product);
         const ndk = await getNdk();
         const ndkEvent = new NDKEvent(ndk);
-        ndkEvent.kind = 30018;
+        ndkEvent.kind = nostrProduct.kind;
         ndkEvent.content = JSON.stringify(nostrProduct.content);
-        ndkEvent.tags = nostrProduct.tags;
+        ndkEvent.tags = nostrProduct.tags as NDKTag[];
 
         await ndkEvent.sign();
 

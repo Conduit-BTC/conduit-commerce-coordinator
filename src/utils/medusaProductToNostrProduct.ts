@@ -1,36 +1,38 @@
-export default function medusaToNostrProduct(medusaProduct, stallId = "default-stall") {
-    const specs = medusaProduct.options.map(option => {
-        return [
-            option.title?.toLowerCase(),
-            option.values?.map(v => v.value).join(", ")
-        ];
-    });
+import { Product } from ".medusa/types/remote-query-entry-points";
 
-    const images = medusaProduct.images.map(img => img.url);
+type ShippingTag = ['shipping', `30406:${string}:${string}`]; // Shipping method; follows addressable format of "30406:<pubkey>:<d-tag>"
+type ShippingCollectionTag = ['shipping', `30405:${string}:${string}`]; // References to a product collection, in this case, shipping is inherited from the collection; follows addressable format of "30405:<pubkey>:<d-tag>"
+type OptionalTag = string[] | ShippingTag | ShippingCollectionTag;
 
-    const tags = [
-        ["d", medusaProduct.id], // Required d tag with product id
-        ...medusaProduct.categories.map(cat => ["t", cat.handle])
+type NostrProduct = {
+    kind: 30402,
+    tags: [
+        ['d', string], // Medusa Product ID
+        ['title', string],
+        ['price', string, string], // ["price", <amount>, <currency>]
+        ...([OptionalTag] | OptionalTag[]) // Additional optional tags (zero or more)
+    ],
+    content: string // Note to the Merchant
+}
+
+export default function medusaToNostrProduct(medusaProduct: Product): NostrProduct {
+    const { images, description } = medusaProduct;
+
+    const requiredTags: [['d', string], ['title', string], ['price', string, string]] = [
+        ["d", medusaProduct.id],
+        ["title", medusaProduct.title],
+        ["price", "123.45", "USD"] // TODO: Replace with actual price from the Pricing Module
     ];
 
-    const nostrEvent = {
-        kind: 30018,
-        content: {
-            id: medusaProduct.id,
-            stall_id: stallId,
-            name: medusaProduct.title,
-            description: medusaProduct.description,
-            images: images,
-            currency: "USD", // Assuming USD as default since not specified in Medusa product
-            price: 0, // Price needs to be set separately as it's not in the base product
-            quantity: null, // Quantity would need to be calculated from variants
-            specs: specs,
-            // Shipping would need to be added separately as it's not in the Medusa product
-            shipping: []
-        },
-        tags: tags
-    };
+    const optionalTags: OptionalTag[] = [
+        ...images.map(img => ["image", img.url] as OptionalTag)
+    ];
 
+    const nostrEvent: NostrProduct = {
+        kind: 30402,
+        content: description || "",
+        tags: [...requiredTags, ...optionalTags]
+    };
     return nostrEvent;
 }
 
