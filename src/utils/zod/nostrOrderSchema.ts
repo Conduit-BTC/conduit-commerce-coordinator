@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+export type CustomerOrder = z.infer<typeof CustomerOrderSchema>
+export type PaymentRequest = z.infer<typeof PaymentRequestSchema>
+export type OrderStatus = z.infer<typeof OrderStatusSchema>
+export type OrderEvent = z.infer<typeof OrderEventSchema>
+
 const hexString = z.string()
     .refine(val => /^[0-9a-f]{64}$/i.test(val), {  // Updated to 64 characters
         message: "Must be a 64-character hex string"
@@ -23,24 +28,21 @@ const AddressSchema = z.object({
     special_instructions: z.string(),
 });
 
-const BaseOrderSchema = z.object({
+const CustomerOrderSchema = z.object({
     id: z.string(),
     type: z.literal(0),
     contact: ContactSchema,
-});
-
-const OptionalOrderFields = z.object({
-    name: z.string().optional(),
-    address: AddressSchema,  // Updated to use AddressSchema
-    message: z.string().optional(),
     items: z.array(z.object({
+        title: z.string(),
+        unit_price: z.number().positive(),
         product_id: z.string(),
         quantity: z.number().int().positive(),
-    })),  // Made required since it appears in your data
-    shipping_id: z.string(),  // Made required since it appears in your data
+    })),
+    address: AddressSchema,
+    shipping_id: z.string(),
+    name: z.string().optional(),
+    message: z.string().optional(),
 });
-
-const CustomerOrderSchema = BaseOrderSchema.merge(OptionalOrderFields);
 
 const PaymentOptionSchema = z.object({
     type: z.enum(["url", "btc", "ln", "lnurl"]),

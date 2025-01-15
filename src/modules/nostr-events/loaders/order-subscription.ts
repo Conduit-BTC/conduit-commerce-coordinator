@@ -4,13 +4,12 @@ import {
 } from "@medusajs/framework/types"
 import { NDKEvent, NDKFilter, NDKKind, NDKPrivateKeySigner, NDKUser } from "@nostr-dev-kit/ndk"
 import { NostrEventQueue, QueueEvent } from "@/utils/NostrEventQueue"
-import { validateOrderEvent } from "@/utils/zod/nostrOrderSchema"
+import { OrderEvent, validateOrderEvent } from "@/utils/zod/nostrOrderSchema"
 import { sanitizeDecryptedMessage } from "@/utils/sanitizeDecryptedMessage"
 import { getNdk } from "@/utils/NdkService"
-import newOrderEventWorkflow from "@/workflows/order/store-order-event"
-import NostrEventsModuleService from "@/modules/nostr-events/service"
-import { NOSTR_EVENTS_MODULE } from "@/modules/nostr-events"
 import checkOrderEventExistsWorkflow from "@/workflows/order/check-order-event-exists"
+import { createCartWorkflow } from "@medusajs/medusa/core-flows"
+import newOrderEventWorkflow from "@/workflows/order/store-order-event"
 
 function serializeNDKEvent(event: NDKEvent) {
     return {
@@ -73,6 +72,9 @@ export default async function orderSubscriptionLoader({
             const sanitizedJson = sanitizeDecryptedMessage(contentJson.content)
             const order = validateOrderEvent(sanitizedJson)
 
+            // TODO: Fix recent change to validateOrderEvent schema which includes additional cart item fields
+            logger.info(`[orderSubscriptionLoader]: Validating order: ${JSON.stringify(order)}`)
+
             if (!order.success) {
                 // We've determined this is not a valid order event, so we can clear it from the queue
                 queue.confirmProcessed(queueEvent.id);
@@ -84,12 +86,34 @@ export default async function orderSubscriptionLoader({
             // Store the Order event
             const { result: storeEventResult } = await newOrderEventWorkflow().run({ input: { orderEvent: serializeNDKEvent(event) as NDKEvent } })
 
-
             if (!storeEventResult.success) {
                 logger.error(`[orderSubscriptionLoader]: Failed to process order event: ${storeEventResult.message}`)
                 queue.requeueEvent(queueEvent.id)
             }
 
+            const { data }: { data: OrderEvent } = order
+
+            if (data.type === 0) { // This is a CustomerOrder event
+                logger.info(`[orderSubscriptionLoader]: Creating cart for order: ${JSON.stringify(data.items)}`)
+                const cart = await createCartWorkflow.run({
+                    input: {
+                        currency_code: "sats",
+                        shipping_address: {
+                            address_1: data.address.address1,
+                            address_2: data.address.address2,
+                            city: data.address.city,
+                            first_name: data.address.first_name,
+                            last_name: data.address.last_name,
+                            postal_code: data.address.zip,
+                        },
+                        items: data.items
+                    }
+                })
+
+                logger.info(`[orderSubscriptionLoader]: Cart created: ${cart}`)
+
+                // Create Order
+            }
             logger.info(`[orderSubscriptionLoader]: Order processed: ${event.id}`)
             queue.confirmProcessed(queueEvent.id)
 
