@@ -1,7 +1,7 @@
 import { SubscriberArgs, type SubscriberConfig } from "@medusajs/framework"
 import syncProductDelete from "../workflows/sync/sync-product-delete"
 
-export default async function orderPlacedHandler({
+export default async function productDeletedHandler({
     event: { data },
     container,
 }: SubscriberArgs<{ id: string }>) {

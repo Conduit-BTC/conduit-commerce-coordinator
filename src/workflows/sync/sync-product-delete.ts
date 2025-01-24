@@ -2,12 +2,11 @@ import {
     createWorkflow,
     WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
-import { broadcastDeletionRequestStep, deleteProductEventStep } from "./utils";
+import { deleteProductEventStep } from "./utils";
 
 const syncProductDelete = createWorkflow(
     "desync-product",
     function ({ productId }: { productId: string }) {
-        broadcastDeletionRequestStep(productId)
         deleteProductEventStep(productId)
 
         return new WorkflowResponse({

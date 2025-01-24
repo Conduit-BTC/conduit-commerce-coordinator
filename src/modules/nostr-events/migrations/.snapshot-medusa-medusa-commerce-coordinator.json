@@ -119,6 +119,15 @@
     },
     {
       "columns": {
+        "medusaVariantId": {
+          "name": "medusaVariantId",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
         "medusaProductId": {
           "name": "medusaProductId",
           "type": "text",
@@ -229,7 +238,7 @@
         {
           "keyName": "product_nostr_event_pkey",
           "columnNames": [
-            "medusaProductId"
+            "medusaVariantId"
           ],
           "composite": false,
           "primary": true,

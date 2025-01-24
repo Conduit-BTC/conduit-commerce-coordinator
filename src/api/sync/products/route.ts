@@ -2,7 +2,7 @@ import type {
     MedusaRequest,
     MedusaResponse,
 } from "@medusajs/framework/http"
-import syncProductUpsert from "@/workflows/sync/sync-product-create"
+import syncProductUpsert from "@/workflows/sync/sync-product-upsert"
 import { Product } from ".medusa/types/remote-query-entry-points"
 
 export async function GET(
