@@ -1,9 +1,9 @@
 {
-  "name": "medusa-starter-default",
+  "name": "conduit-commerce-coordinator",
   "version": "0.0.1",
-  "description": "A starter for Medusa projects.",
-  "author": "Medusa (https://medusajs.com)",
-  "license": "MIT",
+  "description": "Merchant admin system for decentralized Nostr E-Commerce",
+  "author": "Conduit BTC - https://conduitbtc.com",
+  "license": "MPL-2.0",
   "keywords": [
     "sqlite",
     "postgres",
