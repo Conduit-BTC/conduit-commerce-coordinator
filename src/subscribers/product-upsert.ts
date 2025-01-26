@@ -1,7 +1,7 @@
 import { SubscriberArgs, type SubscriberConfig } from "@medusajs/framework"
 import syncProductCreate from "@/workflows/sync/sync-product-upsert"
 
-export default async function productCreatedHandler({
+export default async function productUpsertHandler({
     event: { data },
     container,
 }: SubscriberArgs<{ id: string }>) {

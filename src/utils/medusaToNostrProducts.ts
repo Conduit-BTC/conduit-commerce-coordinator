@@ -42,7 +42,7 @@ export default function medusaToNostrProducts(medusaProduct: Product, merchantPu
         if (medusaProduct.variants.length > 1) type = i === 0 ? "variable" : "variation";
 
         const requiredTags: [['d', string], ['title', string], ['price', string, string], ['type', string]] = [
-            ["d", `${medusaProduct.id}:${variant.id}`],
+            ["d", `${medusaProduct.id}___${variant.id}`],
             ["title", medusaProduct.title],
             ["price", price.toString(), currency],
             ["type", type]

@@ -2,7 +2,7 @@ import {
     createStep, StepResponse
 } from "@medusajs/framework/workflows-sdk"
 import { getNdk } from "@/utils/NdkService"
-import { NDKEvent, NDKTag } from "@nostr-dev-kit/ndk";
+import { NDKEvent, NDKRelay, NDKTag } from "@nostr-dev-kit/ndk";
 import { NostrProduct } from "@/utils/medusaToNostrProducts";
 import { NOSTR_EVENTS_MODULE } from "@/modules/nostr-events";
 import medusaToNostrProducts from "@/utils/medusaToNostrProducts";
@@ -65,7 +65,7 @@ export const storeProductEventsStep = createStep(
 
         for (const nostrEvent of nostrEvents) {
             const dTag = nostrEvent.tags.find(tag => tag[0] === "d")
-            const [medusaProductId, medusaVariantId] = dTag[1].split(":");
+            const [medusaProductId, medusaVariantId] = dTag[1].split("___");
             const eventData = {
                 id: nostrEvent.id,
                 medusaProductId,
@@ -105,9 +105,9 @@ export const broadcastProductEventsStep = createStep(
                     new Promise((_, reject) =>
                         setTimeout(() => reject(new Error('Publish timeout')), 5000)
                     )
-                ]);
-                logger.info(`[sync-product-create] Product event ${nostrEvent.id} successfully broadcast to the following relays: `);
-                console.log(relays);
+                ]) as Set<NDKRelay>;
+                logger.info(`[sync-product-create] Product event with ID ${nostrEvent.id} successfully broadcast to the following relays: `);
+                relays.forEach(relay => logger.info(`[sync-product-create] ${relay.url}`));
                 // TODO: Add retry logic + fail handling
             }
 
