@@ -8,7 +8,7 @@ import { OrderEvent, validateOrderEvent } from "@/utils/zod/nostrOrderSchema"
 import { getNdk } from "@/utils/NdkService"
 import checkOrderEventExistsWorkflow from "@/workflows/order/check-order-event-exists"
 import { createCartWorkflow } from "@medusajs/medusa/core-flows"
-import getProductWorkflow from "@/workflows/products/get-product"
+import getProductVariantWorkflow from "@/workflows/product/get-product-variant"
 
 function serializeNDKEvent(event: NDKEvent) {
     return {
@@ -71,6 +71,8 @@ export default async function orderSubscriptionLoader({
             const rumorJson: NDKEvent = JSON.parse(rumor)
             const order = validateOrderEvent(rumorJson)
 
+            console.log(">>>>>> Received order event: ", rumorJson)
+
             if (!order.success) {
                 // We've determined this is not a valid order event, so we can clear it from the queue
                 queue.confirmProcessed(queueEvent.id);
@@ -80,7 +82,7 @@ export default async function orderSubscriptionLoader({
             logger.info(`[orderSubscriptionLoader]: Processing order: ${event.id}`)
 
             // Store the Order event
-            // @block-commit RE-ENABLE THIS WHEN THE ORDER EVENT WORKFLOW IS READY
+            // TODO: RE-ENABLE THIS WHEN THE ORDER EVENT WORKFLOW IS READY
             // const { result: storeEventResult } =
             //     await newOrderEventWorkflow().run({ input: { orderEvent: serializeNDKEvent(event) as NDKEvent } })
 
@@ -93,20 +95,32 @@ export default async function orderSubscriptionLoader({
             const subject = data.tags.find(tag => tag[0] === "subject")?.[1];
 
             if (subject === "order-info") { // This is a CustomerOrder event
-                const items = data.tags.filter(tag => tag[0] === "item").map(tag => {
-                    const productId = tag[1].split(":")[2]
-                    const quantity = tag[2]
-                    return {
-                        productId,
-                        quantity
-                    }
-                });
+                const items = await Promise.all(data.tags
+                    .filter(tag => tag[0] === "item")
+                    .map(async tag => {
+                        const productId = tag[1].split(":")[2].split("___")[0]
+                        const variantId = tag[1].split(":")[2].split("___")[1]
+                        const quantity = tag[2]
+
+                        // const prices = await getPricesWorkflow.run({ input: { variantId } })
+
+                        return {
+                            productId,
+                            variantId,
+                            quantity,
+                            // prices
+                        }
+                    })
+                );
 
                 let products: any[] = [];
                 let missingProductIds: string[] = []; // If the product isn't found in the database, we'll need to fetch it from the relay pool
                 for (let item of items) {
-                    const { result } = await getProductWorkflow.run({ input: { productId: item.productId } })
-                    const product = result.product;
+                    const { result } = await getProductVariantWorkflow.run({ input: { variantId: item.variantId } })
+                    const product = result.variant;
+                    product["unit_price"] = 123.45 // TODO: Replace with real price
+                    product["quantity"] = item.quantity
+
                     if (product) products.push(product)
                     else missingProductIds.push(item.productId)
                 }

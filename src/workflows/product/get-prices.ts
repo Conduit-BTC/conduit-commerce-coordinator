@@ -4,22 +4,12 @@ import {
     createWorkflow,
     WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 
 const getPricesStep = createStep(
     "get-variant-prices-step",
     async ({ variantId }: { variantId: string }, { container }): Promise<any> => {
-        const query = container.resolve(ContainerRegistrationKeys.QUERY)
 
-        const { data: productVariantPriceSets } = await query.graph({
-            entity: "product_variant_price_set",
-            fields: ["*"],
-            filters: {
-                variant_id: variantId
-            }
-        })
-
-        return new StepResponse(productVariantPriceSets)
+        return new StepResponse([])
     }
 )
 
