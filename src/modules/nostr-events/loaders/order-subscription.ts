@@ -9,6 +9,7 @@ import { getNdk } from "@/utils/NdkService"
 import checkOrderEventExistsWorkflow from "@/workflows/order/check-order-event-exists"
 import { createCartWorkflow } from "@medusajs/medusa/core-flows"
 import getProductVariantWorkflow from "@/workflows/product/get-product-variant"
+import getPricesWorkflow from "@/workflows/product/get-prices"
 
 function serializeNDKEvent(event: NDKEvent) {
     return {
@@ -84,7 +85,7 @@ export default async function orderSubscriptionLoader({
             // Store the Order event
             // TODO: RE-ENABLE THIS WHEN THE ORDER EVENT WORKFLOW IS READY
             // const { result: storeEventResult } =
-            //     await newOrderEventWorkflow().run({ input: { orderEvent: serializeNDKEvent(event) as NDKEvent } })
+            //     await newOrderEventWorkflow(container).run({ input: { orderEvent: serializeNDKEvent(event) as NDKEvent } })
 
             // if (!storeEventResult.success) {
             //     logger.error(`[orderSubscriptionLoader]: Failed to process order event: ${storeEventResult.message}`)
@@ -102,13 +103,13 @@ export default async function orderSubscriptionLoader({
                         const variantId = tag[1].split(":")[2].split("___")[1]
                         const quantity = tag[2]
 
-                        // const prices = await getPricesWorkflow.run({ input: { variantId } })
+                        const prices = await getPricesWorkflow(container).run({ input: { variantId } })
 
                         return {
                             productId,
                             variantId,
                             quantity,
-                            // prices
+                            prices
                         }
                     })
                 );
@@ -116,9 +117,9 @@ export default async function orderSubscriptionLoader({
                 let products: any[] = [];
                 let missingProductIds: string[] = []; // If the product isn't found in the database, we'll need to fetch it from the relay pool
                 for (let item of items) {
-                    const { result } = await getProductVariantWorkflow.run({ input: { variantId: item.variantId } })
+                    const { result } = await getProductVariantWorkflow(container).run({ input: { variantId: item.variantId } })
                     const product = result.variant;
-                    product["unit_price"] = 123.45 // TODO: Replace with real price
+                    product["unit_price"] = item.prices[0] // TODO: Replace with real price
                     product["quantity"] = item.quantity
 
                     if (product) products.push(product)
@@ -151,7 +152,7 @@ export default async function orderSubscriptionLoader({
                     };
                 }
                 logger.info(`[orderSubscriptionLoader]: Creating cart for order...`)
-                const cart = await createCartWorkflow.run({ input })
+                const cart = await createCartWorkflow(container).run({ input })
 
                 logger.info(`[orderSubscriptionLoader]: Cart created: ${cart}`)
 

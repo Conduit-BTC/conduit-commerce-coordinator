@@ -8,8 +8,33 @@ import {
 const getPricesStep = createStep(
     "get-variant-prices-step",
     async ({ variantId }: { variantId: string }, { container }): Promise<any> => {
+        const query = container.resolve("query")
 
-        return new StepResponse([])
+        const { data: productVariantPriceSets } = await query.graph({
+            entity: "product_variant_price_set",
+            fields: ["*"],
+            filters: {
+                variant_id: variantId
+            }
+        })
+
+        const { data: priceSets } = await query.graph({
+            entity: "price_set",
+            fields: ["*"],
+            filters: {
+                id: productVariantPriceSets.map((priceSet) => priceSet.price_set_id)
+            }
+        })
+
+        const { data: prices } = await query.graph({
+            entity: "price",
+            fields: ["*"],
+            filters: {
+                price_set_id: priceSets.map((priceSet) => priceSet.id)
+            }
+        })
+
+        return new StepResponse(prices)
     }
 )
 

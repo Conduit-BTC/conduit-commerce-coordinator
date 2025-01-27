@@ -6,7 +6,6 @@ import {
     createWorkflow,
     StepResponse,
     WorkflowResponse,
-    when,
 } from "@medusajs/framework/workflows-sdk"
 import { NDKEvent } from "@nostr-dev-kit/ndk"
 
