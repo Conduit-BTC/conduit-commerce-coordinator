@@ -31,6 +31,7 @@ export default async function orderSubscriptionLoader({
     if (process.env.DISABLE_ORDER_FETCHING === 'true') return;
 
     const logger: Logger = container.resolve("logger")
+    const query = container.resolve(ContainerRegistrationKeys.QUERY) // << This fails
 
     const queue = new NostrEventQueue(logger)
 
