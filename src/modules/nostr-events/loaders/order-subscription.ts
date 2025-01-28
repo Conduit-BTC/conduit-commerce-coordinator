@@ -10,6 +10,8 @@ import checkOrderEventExistsWorkflow from "@/workflows/order/check-order-event-e
 import { createCartWorkflow } from "@medusajs/medusa/core-flows"
 import getProductVariantWorkflow from "@/workflows/product/get-product-variant"
 import getPricesWorkflow from "@/workflows/product/get-prices"
+import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
+import getProductSalesChannelsWorkflow from "@/workflows/product/get-product-sales-channel"
 
 function serializeNDKEvent(event: NDKEvent) {
     return {
@@ -29,6 +31,7 @@ export default async function orderSubscriptionLoader({
     if (process.env.DISABLE_ORDER_FETCHING === 'true') return;
 
     const logger: Logger = container.resolve("logger")
+
     const queue = new NostrEventQueue(logger)
 
     const relayUrl = 'ws://localhost:7777'
@@ -72,7 +75,7 @@ export default async function orderSubscriptionLoader({
             const rumorJson: NDKEvent = JSON.parse(rumor)
             const order = validateOrderEvent(rumorJson)
 
-            console.log(">>>>>> Received order event: ", rumorJson)
+            // console.log(">>>>>> Received order event: ", rumorJson)
 
             if (!order.success) {
                 // We've determined this is not a valid order event, so we can clear it from the queue
@@ -104,12 +107,13 @@ export default async function orderSubscriptionLoader({
                         const quantity = tag[2]
 
                         const prices = await getPricesWorkflow(container).run({ input: { variantId } })
+                        console.log(">>>>>> Prices: ", prices)
 
                         return {
                             productId,
                             variantId,
                             quantity,
-                            prices
+                            // prices
                         }
                     })
                 );
@@ -117,9 +121,14 @@ export default async function orderSubscriptionLoader({
                 let products: any[] = [];
                 let missingProductIds: string[] = []; // If the product isn't found in the database, we'll need to fetch it from the relay pool
                 for (let item of items) {
-                    const { result } = await getProductVariantWorkflow(container).run({ input: { variantId: item.variantId } })
-                    const product = result.variant;
-                    product["unit_price"] = item.prices[0] // TODO: Replace with real price
+                    const { result: productVariantResult } = await getProductVariantWorkflow(container).run({ input: { variantId: item.variantId } })
+                    const product = productVariantResult.variant;
+                    const { result: salesChannelsResult } = await getProductSalesChannelsWorkflow().run({ input: { productId: item.productId } })
+                    const salesChannels = salesChannelsResult.productSalesChannels;
+                    console.log(">>>>>>> Sales channels: ", salesChannels)
+
+                    // product["unit_price"] = item.prices[0] // TODO: Replace with real price
+                    product["unit_price"] = 123.45 // TODO: Replace with real price
                     product["quantity"] = item.quantity
 
                     if (product) products.push(product)
@@ -163,6 +172,7 @@ export default async function orderSubscriptionLoader({
 
         } catch (error) {
             logger.error(`[orderSubscriptionLoader]: Something went wrong trying to process an order - ${error.message}`)
+            console.error(error)
         }
     })
 }

@@ -1,3 +1,5 @@
+import { MedusaContainer } from "@medusajs/framework"
+import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import {
     createStep,
     StepResponse,
@@ -8,7 +10,8 @@ import {
 const getPricesStep = createStep(
     "get-variant-prices-step",
     async ({ variantId }: { variantId: string }, { container }): Promise<any> => {
-        const query = container.resolve("query")
+
+        const query = container.resolve(ContainerRegistrationKeys.QUERY)
 
         const { data: productVariantPriceSets } = await query.graph({
             entity: "product_variant_price_set",
