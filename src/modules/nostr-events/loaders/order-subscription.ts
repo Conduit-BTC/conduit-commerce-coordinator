@@ -4,14 +4,10 @@ import {
 } from "@medusajs/framework/types"
 import { NDKEvent, NDKFilter, NDKKind, NDKPrivateKeySigner, NDKUser } from "@nostr-dev-kit/ndk"
 import { NostrEventQueue, QueueEvent } from "@/utils/NostrEventQueue"
-import { OrderEvent, validateOrderEvent } from "@/utils/zod/nostrOrderSchema"
+import { validateOrderEvent } from "@/utils/zod/nostrOrderSchema"
 import { getNdk } from "@/utils/NdkService"
 import checkOrderEventExistsWorkflow from "@/workflows/order/check-order-event-exists"
-import { createCartWorkflow } from "@medusajs/medusa/core-flows"
-import getProductVariantWorkflow from "@/workflows/product/get-product-variant"
-import getPricesWorkflow from "@/workflows/product/get-prices"
-import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
-import getProductSalesChannelsWorkflow from "@/workflows/product/get-product-sales-channel"
+import newOrderEventWorkflow from "@/workflows/order/process-nostr-order-event"
 
 function serializeNDKEvent(event: NDKEvent) {
     return {
@@ -31,7 +27,6 @@ export default async function orderSubscriptionLoader({
     if (process.env.DISABLE_ORDER_FETCHING === 'true') return;
 
     const logger: Logger = container.resolve("logger")
-    const query = container.resolve(ContainerRegistrationKeys.QUERY) // << This fails
 
     const queue = new NostrEventQueue(logger)
 
@@ -79,101 +74,26 @@ export default async function orderSubscriptionLoader({
             // console.log(">>>>>> Received order event: ", rumorJson)
 
             if (!order.success) {
-                // We've determined this is not a valid order event, so we can clear it from the queue
-                queue.confirmProcessed(queueEvent.id);
+                queue.confirmProcessed(queueEvent.id); // We've determined this is not a valid order event, so we can clear it from the queue
                 return;
             }
 
-            logger.info(`[orderSubscriptionLoader]: Processing order: ${event.id}`)
+            const processOrderEventResult = await newOrderEventWorkflow(container).run({ input: { validatedOrderEvent: order.data, orderNdkEvent: serializeNDKEvent(event) as NDKEvent } })
 
-            // Store the Order event
-            // TODO: RE-ENABLE THIS WHEN THE ORDER EVENT WORKFLOW IS READY
-            // const { result: storeEventResult } =
-            //     await newOrderEventWorkflow(container).run({ input: { orderEvent: serializeNDKEvent(event) as NDKEvent } })
-
-            // if (!storeEventResult.success) {
-            //     logger.error(`[orderSubscriptionLoader]: Failed to process order event: ${storeEventResult.message}`)
-            //     queue.requeueEvent(queueEvent.id)
-            // }
-
-            const { data }: { data: OrderEvent } = order
-            const subject = data.tags.find(tag => tag[0] === "subject")?.[1];
-
-            if (subject === "order-info") { // This is a CustomerOrder event
-                const items = await Promise.all(data.tags
-                    .filter(tag => tag[0] === "item")
-                    .map(async tag => {
-                        const productId = tag[1].split(":")[2].split("___")[0]
-                        const variantId = tag[1].split(":")[2].split("___")[1]
-                        const quantity = tag[2]
-
-                        const prices = await getPricesWorkflow(container).run({ input: { variantId } })
-                        console.log(">>>>>> Prices: ", prices)
-
-                        return {
-                            productId,
-                            variantId,
-                            quantity,
-                            // prices
-                        }
-                    })
-                );
-
-                let products: any[] = [];
-                let missingProductIds: string[] = []; // If the product isn't found in the database, we'll need to fetch it from the relay pool
-                for (let item of items) {
-                    const { result: productVariantResult } = await getProductVariantWorkflow(container).run({ input: { variantId: item.variantId } })
-                    const product = productVariantResult.variant;
-                    const { result: salesChannelsResult } = await getProductSalesChannelsWorkflow().run({ input: { productId: item.productId } })
-                    const salesChannels = salesChannelsResult.productSalesChannels;
-                    console.log(">>>>>>> Sales channels: ", salesChannels)
-
-                    // product["unit_price"] = item.prices[0] // TODO: Replace with real price
-                    product["unit_price"] = 123.45 // TODO: Replace with real price
-                    product["quantity"] = item.quantity
-
-                    if (product) products.push(product)
-                    else missingProductIds.push(item.productId)
-                }
-                if (missingProductIds.length > 0) {
-                    console.error(`[orderSubscriptionLoader]: Missing products: ${missingProductIds}`)
-                }
-
-                // TODO: If there are missing products, we need to fetch them from the relay pool
-                // TODO: Include a special tag on the order that includes the item's complete event. If that info isn't present, do the lookup (for other clients)
-                // TODO: Discuss with the RoundTable team : We should contain a full copy of the product event in the order event, so that we can process the order without needing to look up the product event from the relay pool.
-                const addressString = data.tags.find(tag => tag[0] === "address")?.[1];
-                let address: { address1: string, address2?: string, city: string, first_name: string, last_name: string, zip: string } | undefined;
-                if (addressString) address = JSON.parse(addressString);
-
-                const input: any = {
-                    currency_code: "sats",
-                    items: products
-                };
-
-                if (address) {
-                    input.shipping_address = {
-                        address_1: address.address1,
-                        address_2: address.address2,
-                        city: address.city,
-                        first_name: address.first_name,
-                        last_name: address.last_name,
-                        postal_code: address.zip,
-                    };
-                }
-                logger.info(`[orderSubscriptionLoader]: Creating cart for order...`)
-                const cart = await createCartWorkflow(container).run({ input })
-
-                logger.info(`[orderSubscriptionLoader]: Cart created: ${cart}`)
-
-                // Create Order
+            if (!processOrderEventResult.success) {
+                logger.error(`[orderSubscriptionLoader]: Failed to process order event: ${processOrderEventResult.message}`)
+                queue.requeueEvent(queueEvent.id)
+                return;
             }
-            logger.info(`[orderSubscriptionLoader]: Order processed: ${event.id}`)
-            queue.confirmProcessed(queueEvent.id)
-
+            else {
+                logger.info(`[orderSubscriptionLoader]: Order processed: ${event.id}`)
+                queue.confirmProcessed(queueEvent.id)
+                return;
+            }
         } catch (error) {
-            logger.error(`[orderSubscriptionLoader]: Something went wrong trying to process an order - ${error.message}`)
-            console.error(error)
+            logger.error(`[orderSubscriptionLoader]: Failed to process order event: ${error.message}`)
+            queue.requeueEvent(queueEvent.id)
+            return;
         }
     })
 }
