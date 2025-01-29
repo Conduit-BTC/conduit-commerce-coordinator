@@ -1,3 +1,5 @@
+# ⚠️ This project is under heavy development - Clone and tinker, or wait for release ⚠️
+
 # C3 - Conduit Commerce Coordinator
 
 ### The first Nostr Commerce Coorinator (NCC) - Built with MedusaJS
