@@ -67,7 +67,8 @@ const createCartStep = createStep(
                     const variantId = tag[1].split(":")[2].split("___")[1]
                     const quantity = tag[2]
 
-                    const prices = await getPricesWorkflow().run({ input: { variantId } })
+                    console.log("Calling getPricesWorkflow")
+                    const prices = await getPricesWorkflow(container).run({ input: { variantId } })
                     console.log(">>>>>> Prices: ", prices)
 
                     return {
@@ -82,9 +83,9 @@ const createCartStep = createStep(
             let products: any[] = [];
             let missingProductIds: string[] = []; // If the product isn't found in the database, we'll need to fetch it from the relay pool
             for (let item of items) {
-                const { result: productVariantResult } = await getProductVariantWorkflow().run({ input: { variantId: item.variantId } })
+                const { result: productVariantResult } = await getProductVariantWorkflow(container).run({ input: { variantId: item.variantId } })
                 const product = productVariantResult.variant;
-                const { result: salesChannelsResult } = await getProductSalesChannelsWorkflow().run({ input: { productId: item.productId } })
+                const { result: salesChannelsResult } = await getProductSalesChannelsWorkflow(container).run({ input: { productId: item.productId } })
                 const salesChannels = salesChannelsResult.productSalesChannels;
                 console.log(">>>>>>> Sales channels: ", salesChannels)
 

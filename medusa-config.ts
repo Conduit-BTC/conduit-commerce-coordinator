@@ -15,7 +15,13 @@ module.exports = defineConfig({
   },
   modules: [
     {
+      resolve: "@medusajs/medusa/event-bus-local",
+    },
+    {
       resolve: "./src/modules/nostr-events"
+    },
+    {
+      resolve: "./src/modules/nostr-order-received-event"
     },
     {
       resolve: "./src/modules/relay-pool"
@@ -28,7 +34,7 @@ module.exports = defineConfig({
             resolve: "./src/modules/strike-payment",
             id: "strike-payment",
             options: {
-              apiKey: process.env.STRIKE_KE_API_KEY!,
+              apiKey: process.env.STRIKE_API_KEY!,
             }
           }
         ]
