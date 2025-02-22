@@ -1,8 +1,10 @@
 import NostrEventsModuleService from "../nostr-events/service";
 import { Module } from "@medusajs/framework/utils";
-import orderSubscriptionLoader from "./loaders/order-subscription-loader";
+import orderSubscriptionLoader from "./loaders/nostr-relay-listener-loader";
 
-export default Module("nostr-order-received-event", {
+export const NOSTR_RELAY_LISTENER_MODULE = "nostr-relay-listener";
+
+export default Module(NOSTR_RELAY_LISTENER_MODULE, {
     service: NostrEventsModuleService,
     loaders: [orderSubscriptionLoader],
 })

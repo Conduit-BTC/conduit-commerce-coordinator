@@ -21,7 +21,7 @@ module.exports = defineConfig({
       resolve: "./src/modules/nostr-events"
     },
     {
-      resolve: "./src/modules/nostr-order-received-event"
+      resolve: "./src/modules/nostr-relay-listener",
     },
     {
       resolve: "./src/modules/relay-pool"

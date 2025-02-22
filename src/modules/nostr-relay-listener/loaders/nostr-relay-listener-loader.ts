@@ -1,17 +1,18 @@
+import emitNewOrderEventWorkflow from "@/workflows/order/emit-new-order-event"
 import {
-    IEventBusModuleService,
     LoaderOptions,
     Logger,
 } from "@medusajs/framework/types"
 import { Modules } from "@medusajs/framework/utils"
-import NostrOrderEventReceivedService from "../service"
+import LocalEventBusModule from "@medusajs/medusa/event-bus-local"
 
 export default async function orderSubscriptionLoader({
     container,
 }: LoaderOptions) {
     const logger: Logger = container.resolve("logger")
-    const eventBusService: NostrOrderEventReceivedService = container.resolve("nostr-order-received-event")
-    eventBusService.emit({ name: "nostr.order.received", data: "data" }, {})
+    emitNewOrderEventWorkflow.run({ input: { data: "test" } })
+
+
     // console.log(eventBusService)
 }
 

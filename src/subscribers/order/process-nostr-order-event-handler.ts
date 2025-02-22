@@ -12,6 +12,8 @@ export default async function processNostrOrderEventHandler({
     const logger = container.resolve("logger")
     const { signer, nostrEvent: event } = data
 
+    console.log(">>>>>> Received order event: ", event)
+
     try {
         const seal: string = await signer.decrypt(new NDKUser({ pubkey: event.pubkey }), event.content)
         const sealJson = JSON.parse(seal)
@@ -40,5 +42,5 @@ export default async function processNostrOrderEventHandler({
 }
 
 export const config: SubscriberConfig = {
-    event: `nostr.dm.received`,
+    event: `nostr.order.received`,
 }
