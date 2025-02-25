@@ -1,59 +1,6 @@
-# ⚠️ This project is under heavy development - Clone and tinker, or wait for release ⚠️
+# ⚠️ Medusa is an awesome e-commerce framework, but it didn't suit our use case. See https://github.com/Conduit-BTC/a-commerce-coordinator for our Commerce Coordinator! ⚠️
 
 # C3 - Conduit Commerce Coordinator
-
-### The first Nostr Commerce Coorinator (NCC) - Built with MedusaJS
-
-#### THIS IS A WORK IN PROGRESS > Subscribe to our newsletter for updates about Conduit BTC, the C3 system, our in-development Nostr E-Commerce client, and more - [The Conduit Signal](https://buttondown.com/Conduit)
-
-#### Learn more about NCCs by reading their debut article: **[Nostr E-Commerce - Benefits, Shortcomings, and The Case for Coordinators](https://yakihonne.com/article/naddr1qq257drwx94rzs2lwyey7a33v43nqjj4w4j85q3qnkfqwlz7xkhhdaa3ekz88qqqk7a0ks7jpv9zdsv0u206swxjw9rqxpqqqp65wp3t053)**
-
-### What is an NCC?
-
-An NCC (_Nostr Commerce Coordinator_) is a server-based Nostr bot that:
-
-- Is under control of, and represents, the Merchant on Nostr
-- Subscribes to a relay pool
-- Posts and queries NIP-15 events
-- Coordinates the NIP-15 Checkout process on behalf of a Merchant
-  - Inventory Management: verify, increment, and decrement product stock, create
-    and update Stalls and Products on relays via signed events
-  - Payment Processing: generate Lightning invoices, send invoice to customer,
-    respond to payment events via webhook
-  - Fulfillment Services: create shipments, notify fulfillment partners
-- Handle Checkout-related communications with the Customer
-- Notify Merchant when certain things occur
-- Collect sales-relates metrics for Merchant visibility
-
-To summarize the benefits of an NCC:
-
-- Automated, frictionless checkout flow
-- Direct integration with Merchant's existing e-commerce stack: inventory
-  management, payment processing, and shipping service
-- Separation of Checkout-related direct messages (containing ugly JSON) from
-  actual human readable direct messages,
-- General separation-of-concerns between Merchant's social graph and e-commerce
-  activities
-- Ability to implement additional commerce features, such as metrics collection,
-  financial statements, subscriptions, and much more yet-to-be explored
-  possibilities
-
-### Why Medusa?
-
-We have chosen MedusaJS as the backbone of the world's first NCC.
-
-The MedusaJS framework absolutely shines for e-commerce, the developer
-experience is unparalleled, the architecture is well-developed, the
-documentation is as-perfect as it gets. The defaults are sensible. We get,
-out-of-the-box, a complete e-commerce stack: Stores, Products, Orders,
-integrations with external services, and powerful extensibility.
-
-Conduit's primary task-at-hand is to transform MedusaJS into a Nostr Commerce
-Coordinator. Currently, this implementation is a work-in-progress.
-
-We're using [Nostrify](https://nostrify.dev/) and [nostr-tools](https://github.com/nbd-wtf/nostr-tools?tab=readme-ov-file) to handle the Nostr/Medusa dance.
-There's a _lot_ more to come, so check back often, oh Argonaut of the
-Nostrverse!
 
 <p align="center">
   <a href="https://www.medusajs.com">
